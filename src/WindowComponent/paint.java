@@ -98,6 +98,5 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
 
         mouseX = e.getX();
         mouseY = e.getY();
-        System.out.println("dragg");
     }
 }
