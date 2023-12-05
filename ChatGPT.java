@@ -6,21 +6,15 @@ public class ChatGPT {
 
    public static String chatGPT(String prompt) {
        String url = "https://api.openai.com/v1/chat/completions";
-       String apiKey = "";
+       String apiKey = "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";
        String model = "gpt-3.5-turbo";
 
        try {
            URL obj = new URL(url);
            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-           connection.setRequestMethod("POST");
-           connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-           connection.setRequestProperty("Content-Type", "application/json");
-
-           // The request body
-           String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+           connection.setRequestMethod("GET");
            connection.setDoOutput(true);
            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-           writer.write(body);
            writer.flush();
            writer.close();
 
@@ -54,7 +48,7 @@ public class ChatGPT {
 
    public static void main(String[] args) {
 
-       System.out.println(chatGPT("hello, how are you? Can you tell me what's a Fibonacci Number?"));
+       System.out.println(chatGPT("generate a prompt for an artist to use as inspiration"));
 
    }
 }
