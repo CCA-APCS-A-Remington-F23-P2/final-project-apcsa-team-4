@@ -17,10 +17,14 @@ public class Layer {
     private Graphics g;
     private int x;
     private int y;
+    private int windowX;
+    private int windowY;
 
-    public Layer(int width, int height) {
+    public Layer(int width, int height, int windowX, int windowY) {
         buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g = buf.createGraphics();
+        this.windowX = windowX;
+        this.windowY = windowY;
     }
     public BufferedImage getImage() {
         return buf;

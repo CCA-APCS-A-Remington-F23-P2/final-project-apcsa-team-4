@@ -22,17 +22,21 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     private Brush b;
     private int width;
     private int height;
+    private int x;
+    private int y;
     private boolean mouseDown = false;
     private int mouseX = 0;
     private int mouseY = 0;
 
 
-    public paint(int cWidth, int cHeight) {
+    public paint(int cWidth, int cHeight, int x, int y) {
         col = new Color(0, 0, 0);
         layers = new ArrayList<Layer>();
         b = new Brush(new Rectangle(0, 0, 20, 20));
-        curr = new Layer(cWidth, cHeight);
+        curr = new Layer(cWidth, cHeight, x, y);
         layers.add(curr);
+        this.x = x;
+        this.y = y;
 
         width = cWidth;
         height = cHeight;
@@ -50,9 +54,9 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void paint(Graphics window) {
 
         window.setColor(new Color(255, 255, 255));
-        window.drawRect(0, 0, width, height);
+        window.drawRect(x, y, width, height);
         for (Layer l:layers) {
-            window.drawImage(l.getImage(),l.getX(),l.getY(), null);
+            window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
         }
         if (mouseDown) {
             curr.draw(b, mouseX, mouseY);
@@ -91,13 +95,13 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
         mouseDown = false;
     }
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
+        mouseX = e.getX()-x;
+        mouseY = e.getY()-y;
     }
     public void mouseDragged(MouseEvent e) {
         mouseDown = true;
 
-        mouseX = e.getX();
-        mouseY = e.getY();
+        mouseX = e.getX()-x;
+        mouseY = e.getY()-y;
     }
 }
