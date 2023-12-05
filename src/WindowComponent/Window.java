@@ -16,10 +16,13 @@ public class Window extends JFrame {
         super("Paint--");
         setSize(WIDTH,HEIGHT);
 
-        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, WIDTH/2 - PROJECT_WIDTH/2, HEIGHT/2 - PROJECT_HEIGHT/2);
+        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, WIDTH/2 - PROJECT_WIDTH/2, 0);
+        UI u = new UI(200, 200, 0, 600);
         ((Component)p).setFocusable(true);
+        ((Component)u).setFocusable(true);
 
         getContentPane().add(p);
+        getContentPane().add(u);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }

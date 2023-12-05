@@ -88,7 +88,6 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void mouseEntered(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         mouseDown = true;
-        System.out.println("hi");
     }
 
     public void mouseReleased(MouseEvent e) {
