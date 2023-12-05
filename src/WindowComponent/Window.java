@@ -1,4 +1,6 @@
+package src.WindowComponent;
 import javax.swing.JFrame;
+
 import java.awt.Component;
 
 public class Window extends JFrame {
