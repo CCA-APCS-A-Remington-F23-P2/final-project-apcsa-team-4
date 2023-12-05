@@ -13,16 +13,13 @@ import java.util.Date;
 
 public class Layer {
     private BufferedImage buf;
+    private Graphics g;
     private int x;
     private int y;
 
     public Layer(int width, int height) {
         buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-    }
-
-    public void commitPixels() {
-
+        g = buf.createGraphics();
     }
     public BufferedImage getImage() {
         return buf;
@@ -32,5 +29,8 @@ public class Layer {
     }
     public int getY() {
         return y;
+    }
+    public void draw(Brush b, int x, int y) {
+        b.draw(g, x, y);
     }
 }

@@ -11,8 +11,10 @@ public class Window extends JFrame {
         super("Paint--");
         setSize(WIDTH,HEIGHT);
 
+        paint p = new paint(WIDTH, HEIGHT);
+        ((Component)p).setFocusable(true);
 
-
+        getContentPane().add(p);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
