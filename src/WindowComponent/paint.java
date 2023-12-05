@@ -1,5 +1,6 @@
 package src.WindowComponent;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
@@ -89,6 +90,8 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void mousePressed(MouseEvent e) {
         mouseDown = true;
     }
+
+    public Dimension getPreferredSize() {return new Dimension(width, height);}
 
     public void mouseReleased(MouseEvent e) {
         mouseDown = false;
