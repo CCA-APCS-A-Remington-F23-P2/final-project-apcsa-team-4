@@ -53,7 +53,9 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     }
 
     public void paint(Graphics window) {
-        Graphics2D g = (Graphics2D) window;
+        BufferedImage bufferedImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bufferedImage.createGraphics();
+        
         g.setStroke(new BasicStroke(3));
         g.setColor(new Color(170, 170, 170));
         g.drawRect(x-2, y-1, width+2, height+2);
@@ -61,6 +63,9 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
             p.recolor(cp.pick(mouseX, mouseY));
         }
         cp.draw(window);
+        
+        Graphics2D g2dComponent = (Graphics2D) window;
+        g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
     public void keyPressed(KeyEvent e) {
 
