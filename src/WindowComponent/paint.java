@@ -113,4 +113,9 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void recolor(Color c) {
         b.recolor(c);
     }
+
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }

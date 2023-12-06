@@ -8,19 +8,23 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Window extends JFrame {
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 800;
-
     public static final int PROJECT_WIDTH = 500;
     public static final int PROJECT_HEIGHT = 400;
 
     public static final int UI_WIDTH = 200;
+
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 800;
+
     public static final int UI_HEIGHT = HEIGHT;
 
 
@@ -46,7 +50,15 @@ public class Window extends JFrame {
 
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
-        Image brush = new ImageIcon("brush.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT);
+        
+        Image brush = new ImageIcon("newBrush.png").getImage();
+
+        addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent evt) {
+                Component c = (Component) evt.getSource();
+                p.setXY((getWidth()-UI_WIDTH)/2 - PROJECT_WIDTH/2, getHeight()/2-PROJECT_HEIGHT/2-25);
+            }
+        });
 
         p.setCursor(getToolkit().createCustomCursor(
             brush,
@@ -55,7 +67,7 @@ public class Window extends JFrame {
         ));
 
         u.setCursor(getToolkit().createCustomCursor(
-            new ImageIcon("cursor.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT),
+            new ImageIcon("cursor.png").getImage(),
             new Point(0,0),
             "cursor"
         ));
@@ -64,6 +76,8 @@ public class Window extends JFrame {
         u.setBackground(new java.awt.Color(210,210,210));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
+        
         // getContentPane().setLayout(new FlowLayout());
         setVisible(true);
     }
