@@ -58,8 +58,8 @@ public class Brush {
     public void resize() {
 
     }
-    public void recolor() {
-
+    public void recolor(Color c) {
+        color = c;
     }
     public void draw(Graphics window, int x, int y) {
         window.drawImage(img, x, y, null);
