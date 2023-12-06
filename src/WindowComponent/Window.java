@@ -25,7 +25,7 @@ public class Window extends JFrame {
 
 
     public Window() {
-        super("Paint--");
+        super("Paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
         File img = new File("cursor.png");
         try {
@@ -36,7 +36,7 @@ public class Window extends JFrame {
             System.exit(1);
         }
         setSize(WIDTH,HEIGHT);
-        try {setIconImage(ImageIO.read(new File("icon.png"))); } catch (Exception e) {};
+        try {setIconImage(ImageIO.read(new File("logo.png"))); } catch (Exception e) {};
         
 
         paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
