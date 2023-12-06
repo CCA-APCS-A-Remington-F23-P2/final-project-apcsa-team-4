@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 public class UI extends Canvas implements KeyListener, MouseListener, Runnable, MouseMotionListener {
 
     private ColorPicker cp;
+    private paint p;
     private int width;
     private int height;
     private int x;
@@ -31,11 +32,11 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     private int mouseY = 0;
 
 
-    public UI(int cWidth, int cHeight, int x, int y) {
+    public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;
         this.y = y;
-
-        cp = new ColorPicker(x, y, 100, 100);
+        this.p = p;
+        cp = new ColorPicker(x, y, cWidth-1, cWidth-1);
 
         width = cWidth;
         height = cHeight;
@@ -56,12 +57,13 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
         g.setStroke(new BasicStroke(3));
 
         g.setColor(new Color(230, 230, 230));
-        g.fillRect(x, y, width-1, height);
+        g.fillRect(x, cp.getHeight(), width-1, height-100);
         g.setColor(new Color(170, 170, 170));
-        g.drawRect(x, y, width, height);
+        g.drawRect(x-2, y-1, width+2, height+2);
         if (mouseDown&&mouseX>=x&&mouseX<=x+width&&mouseY>=y&&mouseY<=y+height) {
-            cp.pick(mouseX, mouseY);
+            p.recolor(cp.pick(mouseX, mouseY));
         }
+        cp.draw(window);
     }
     public void keyPressed(KeyEvent e) {
 

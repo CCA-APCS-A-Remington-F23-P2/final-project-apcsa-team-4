@@ -58,7 +58,7 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
         g.setStroke(new BasicStroke(3));
 
         g.setColor(new Color(170, 170, 170));
-        g.drawRect(x, y, width, height);
+        g.drawRect(x-2, y-1, width+4, height+3);
         for (Layer l:layers) {
             window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
         }
@@ -108,5 +108,9 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
 
         mouseX = e.getX()-x;
         mouseY = e.getY()-y;
+    }
+
+    public void recolor(Color c) {
+        b.recolor(c);
     }
 }
