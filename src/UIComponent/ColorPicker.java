@@ -15,6 +15,8 @@ public class ColorPicker {
     private int width;
     private int height;
     private BufferedImage background;
+    private int barHeight = 10;
+    private Color currColor;
 
     public ColorPicker(int x, int y, int width, int height) {
         this.x = x;
@@ -22,18 +24,22 @@ public class ColorPicker {
         this.width = width;
         this.height = height;
         background = null ;
+        currColor = new Color(0, 0, 0);
         try {background = ImageIO.read(new File("colorPicker.jpg")); } catch (Exception e) {}
     }
 
     public Color pick(int mouseX, int mouseY) {
-        int[] rgb = background.getRaster().getPixel((int)((mouseX-x)*(background.getWidth()/(width*1.0))), (int)((mouseY-y)*(background.getHeight()/(height*1.0))), new int[3]);
-        return new Color(rgb[0], rgb[1], rgb[2]);
+        int[] rgb = background.getRaster().getPixel((int)((mouseX-x)*(background.getWidth()/(width*1.0))), (int)((mouseY-y)*(background.getHeight()/(height-barHeight*1.0))), new int[3]);
+        currColor = new Color(rgb[0], rgb[1], rgb[2]);
+        return currColor;
     }
 
     public void draw(Graphics window) {
         Graphics2D g = (Graphics2D) window;
         g.setColor(new Color(0, 0, 0));
-        g.drawImage(background, x, y, width, height, null);
+        g.drawImage(background, x, y, width, height-barHeight, null);
+        g.setColor(currColor);
+        g.fillRect(x, y+height-barHeight, width, barHeight);
     }
 
     public int getWidth() {

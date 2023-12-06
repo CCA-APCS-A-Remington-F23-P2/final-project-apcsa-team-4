@@ -36,6 +36,7 @@ public class Window extends JFrame {
             System.exit(1);
         }
         setSize(WIDTH,HEIGHT);
+        
 
         paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
@@ -57,6 +58,9 @@ public class Window extends JFrame {
             new Point(0,0),
             "cursor"
         ));
+
+        p.setBackground(new java.awt.Color(200,200,200));
+        u.setBackground(new java.awt.Color(210,210,210));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // getContentPane().setLayout(new FlowLayout());

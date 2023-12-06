@@ -55,9 +55,6 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     public void paint(Graphics window) {
         Graphics2D g = (Graphics2D) window;
         g.setStroke(new BasicStroke(3));
-
-        g.setColor(new Color(230, 230, 230));
-        g.fillRect(x, cp.getHeight(), width-1, height-100);
         g.setColor(new Color(170, 170, 170));
         g.drawRect(x-2, y-1, width+2, height+2);
         if (mouseDown&&mouseX>=x&&mouseX<=x+width&&mouseY>=y&&mouseY<=y+height) {
