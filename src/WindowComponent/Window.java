@@ -1,10 +1,12 @@
 package src.WindowComponent;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JList;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,12 +34,7 @@ public class Window extends JFrame {
             ex.printStackTrace();
             System.exit(1);
         }
-        java.awt.image.BufferedImage newImage = new java.awt.image.BufferedImage(in.getWidth(), in.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
         setSize(WIDTH,HEIGHT);
-        setCursor(getToolkit().createCustomCursor(
-            newImage,
-            new java.awt.Point(5,5),
-            "pointer"));
 
         paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, WIDTH/2 - PROJECT_WIDTH/2-UI_WIDTH, 0);
         UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, HEIGHT-UI_HEIGHT);
@@ -46,6 +43,18 @@ public class Window extends JFrame {
 
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
+
+        p.setCursor(getToolkit().createCustomCursor(
+            new ImageIcon("cursor.png").getImage(),
+            new Point(0,0),
+            "My cursor"
+        ));
+
+        u.setCursor(getToolkit().createCustomCursor(
+            new ImageIcon("mouse.png").getImage(),
+            new Point(0,0),
+            "My cursor"
+        ));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // getContentPane().setLayout(new FlowLayout());
