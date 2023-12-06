@@ -44,7 +44,7 @@ public class Window extends JFrame {
 
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
-        Image brush = new ImageIcon("brush.png").getImage();
+        Image brush = new ImageIcon("brush.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT);
 
         p.setCursor(getToolkit().createCustomCursor(
             brush,
@@ -53,7 +53,7 @@ public class Window extends JFrame {
         ));
 
         u.setCursor(getToolkit().createCustomCursor(
-            new ImageIcon("cursor.png").getImage(),
+            new ImageIcon("cursor.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT);,
             new Point(0,0),
             "cursor"
         ));
