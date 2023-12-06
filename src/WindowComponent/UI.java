@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -51,9 +52,13 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     }
 
     public void paint(Graphics window) {
+        Graphics2D g = (Graphics2D) window;
+        g.setStroke(new BasicStroke(3));
 
-        window.setColor(new Color(255, 255, 255));
-        window.drawRect(x, y, width, height);
+        g.setColor(new Color(230, 230, 230));
+        g.fillRect(x, y, width-1, height);
+        g.setColor(new Color(170, 170, 170));
+        g.drawRect(x, y, width, height);
         if (mouseDown&&mouseX>=x&&mouseX<=x+width&&mouseY>=y&&mouseY<=y+height) {
             cp.pick(mouseX, mouseY);
         }
