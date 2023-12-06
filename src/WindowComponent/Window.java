@@ -53,7 +53,7 @@ public class Window extends JFrame {
         ));
 
         u.setCursor(getToolkit().createCustomCursor(
-            new ImageIcon("cursor.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT);,
+            new ImageIcon("cursor.png").getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT),
             new Point(0,0),
             "cursor"
         ));
