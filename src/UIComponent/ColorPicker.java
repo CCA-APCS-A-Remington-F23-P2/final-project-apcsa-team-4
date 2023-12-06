@@ -15,7 +15,7 @@ public class ColorPicker {
     private int width;
     private int height;
     private BufferedImage background;
-    private int barHeight = 10;
+    private int barHeight = 15;
     private Color currColor;
 
     public ColorPicker(int x, int y, int width, int height) {
@@ -40,6 +40,8 @@ public class ColorPicker {
         g.drawImage(background, x, y, width, height-barHeight, null);
         g.setColor(currColor);
         g.fillRect(x, y+height-barHeight, width, barHeight);
+        g.setColor(new Color(255, 255, 255));
+        g.drawString(""+currColor.getRed() + ", " + currColor.getGreen() + ", " + currColor.getBlue(), x, y+height-5);
     }
 
     public int getWidth() {
