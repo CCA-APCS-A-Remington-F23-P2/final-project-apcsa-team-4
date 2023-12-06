@@ -39,7 +39,7 @@ public class Window extends JFrame {
             new java.awt.Point(5,5),
             "pointer"));
 
-        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, WIDTH/2 - PROJECT_WIDTH/2-200, 0);
+        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, WIDTH/2 - PROJECT_WIDTH/2-UI_WIDTH, 0);
         UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, HEIGHT-UI_HEIGHT);
         ((Component)p).setFocusable(false);
         ((Component)u).setFocusable(false);
