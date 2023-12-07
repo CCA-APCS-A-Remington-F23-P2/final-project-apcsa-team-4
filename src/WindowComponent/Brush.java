@@ -78,6 +78,7 @@ public class Brush {
         RescaleOp rop = new RescaleOp(scales, new float[4], null);
         bGr.drawImage(rop.filter(wImg, null), 0, 0, null);
         bGr.dispose();
+        color = new Color(scales[0], scales[1], scales[2], scales[3]);
 
     }
     public void recolor(Color c) {
@@ -93,5 +94,9 @@ public class Brush {
         }
         lastX = x;
         lastY = y;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

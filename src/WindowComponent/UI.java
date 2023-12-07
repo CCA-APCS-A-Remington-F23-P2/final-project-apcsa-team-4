@@ -31,6 +31,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     private int mouseX = 0;
     private int mouseY = 0;
     private boolean[] keys = new boolean[2];
+    private boolean[]keysPrev = new boolean[2];
 
     public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;

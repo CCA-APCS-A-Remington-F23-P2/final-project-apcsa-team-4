@@ -60,7 +60,7 @@ public class Window extends JFrame {
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
         
-        Image brush = new ImageIcon("assets/newBrush.png").getImage();
+        Image brush = new ImageIcon("assets/pencil.png").getImage();
 
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent evt) {
