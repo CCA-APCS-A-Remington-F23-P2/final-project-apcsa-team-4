@@ -8,7 +8,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class ColorPicker {
+public class ColorPicker implements UIComponent {
 
     private int x;
     private int y;
@@ -58,5 +58,13 @@ public class ColorPicker {
 
     public int getY() {
         return y;
+    }
+
+    public Color getColor() {
+        return currColor;
+    }
+
+    public int barHeight() {
+        return barHeight;
     }
 }

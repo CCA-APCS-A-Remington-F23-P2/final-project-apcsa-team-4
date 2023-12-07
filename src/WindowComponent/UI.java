@@ -59,7 +59,7 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
         g.setStroke(new BasicStroke(3));
         g.setColor(new Color(170, 170, 170));
         g.drawRect(x-2, y-1, width+2, height+2);
-        if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()) {
+        if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
         }
         cp.draw(window);
