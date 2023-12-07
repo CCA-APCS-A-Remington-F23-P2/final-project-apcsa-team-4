@@ -10,6 +10,9 @@ import java.io.File;
 import java.net.URL;
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import java.awt.TexturePaint;
+import java.awt.BasicStroke;
+import java.awt.Rectangle;
 
 public class Brush {
 
@@ -21,6 +24,8 @@ public class Brush {
     private int width;
     private int height;
     private Color color;
+    private int lastX;
+    private int lastY;
 
     public Brush() {}
     public Brush(Shape s) {
@@ -43,6 +48,8 @@ public class Brush {
             URL url = getClass().getResource("fP.jpg");
             Image image= ImageIO.read(url);
             img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            this.width = image.getWidth(null);
+            this.height = image.getHeight(null);
 
             // Draw the image on to the buffered image
             Graphics2D bGr = img.createGraphics();
@@ -61,7 +68,15 @@ public class Brush {
     public void recolor(Color c) {
         color = c;
     }
-    public void draw(Graphics window, int x, int y) {
+    public void draw(Graphics window, int x, int y, boolean doLine) {
         window.drawImage(img, x, y, null);
+        if (doLine) {
+            TexturePaint paint = new TexturePaint(img, new Rectangle(0, 0, width, height));
+            ((Graphics2D)window).setPaint(paint);
+            ((Graphics2D)window).setStroke(new BasicStroke(this.width));
+            ((Graphics2D)window).drawLine(lastX+width/2, lastY+height/2, x+width/2, y+height/2);
+        }
+        lastX = x;
+        lastY = y;
     }
 }
