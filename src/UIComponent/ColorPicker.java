@@ -40,7 +40,7 @@ public class ColorPicker {
         g.drawImage(background, x, y, width, height-barHeight, null);
         g.setColor(currColor);
         g.fillRect(x, y+height-barHeight, width, barHeight);
-        g.setColor(new Color(255, 255, 255));
+        g.setColor(currColor.getRed()+currColor.getBlue()+currColor.getGreen()<320 ? new Color(255, 255, 255):new Color(0, 0, 0));
         g.drawString(""+currColor.getRed() + ", " + currColor.getGreen() + ", " + currColor.getBlue(), x, y+height-5);
     }
 
