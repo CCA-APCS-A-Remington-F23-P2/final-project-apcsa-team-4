@@ -35,7 +35,7 @@ public class Layer {
     public int getY() {
         return y;
     }
-    public void draw(Brush b, int x, int y) {
-        b.draw(g, x, y);
+    public void draw(Brush b, int x, int y, boolean dl) {
+        b.draw(g, x, y, dl);
     }
 }
