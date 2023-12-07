@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
-
-public class paint extends Canvas implements KeyListener, MouseListener, Runnable, MouseMotionListener {
+public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
     private ArrayList<Layer> layers;
@@ -34,8 +33,13 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     private long systime = 0;
     private static final long LINEDELAY = 30;
     private long clickTime = 0;
+    private boolean shiftDraw = false;
 
     public paint(int cWidth, int cHeight, int x, int y) {
+
+        setVisible(true);
+        setFocusable(true);
+
         col = new Color(0, 0, 0);
         layers = new ArrayList<Layer>();
         b = new Brush(new Rectangle(0, 0, 20, 20));
@@ -49,7 +53,6 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
 
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
-        this.addKeyListener(this);
         new Thread(this).start();
     }
 
@@ -68,17 +71,8 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
             window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
         }
         if (mouseDown) {
-            curr.draw(b, mouseX, mouseY, inDraw);
+            curr.draw(b, mouseX, mouseY, inDraw || shiftDraw);
         }
-    }
-    public void keyPressed(KeyEvent e) {
-
-    }
-    public void keyReleased(KeyEvent e) {
-
-    }
-    public void keyTyped(KeyEvent e) {
-
     }
     public void run()
     {
@@ -125,5 +119,11 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void setXY(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+    public void keyPress(KeyEvent e) {
+
+    }
+    public void keyRelease(KeyEvent e) {
+
     }
 }

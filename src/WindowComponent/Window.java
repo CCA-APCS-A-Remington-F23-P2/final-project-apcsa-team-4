@@ -14,6 +14,8 @@ import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.awt.event.KeyEvent;
+import src.UIComponent.keyLis;
 
 public class Window extends JFrame {
 
@@ -27,10 +29,17 @@ public class Window extends JFrame {
 
     public static final int UI_HEIGHT = HEIGHT;
 
+    private keyLis kl;
+    private paint p;
+
 
     public Window() {
         super("Paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
+
+        kl = new keyLis();
+        kl.parent = this;
+
         File img = new File("assets/cursor.png");
         try {
              in = ImageIO.read(img);
@@ -41,9 +50,8 @@ public class Window extends JFrame {
         }
         setSize(WIDTH,HEIGHT);
         try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
-        
 
-        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         ((Component)p).setFocusable(false);
         ((Component)u).setFocusable(false);
@@ -77,8 +85,16 @@ public class Window extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
-        
+
+        this.addKeyListener(kl);
+
         // getContentPane().setLayout(new FlowLayout());
         setVisible(true);
+    }
+    public void keyHandle(KeyEvent e) {
+        p.keyPress(e);
+    }
+    public void keyHandleRelease(KeyEvent e) {
+        p.keyRelease(e);
     }
 }
