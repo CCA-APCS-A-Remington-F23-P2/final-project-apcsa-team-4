@@ -31,7 +31,6 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     private int mouseX = 0;
     private int mouseY = 0;
 
-
     public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;
         this.y = y;
