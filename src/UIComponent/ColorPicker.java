@@ -8,7 +8,7 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class ColorPicker {
+public class ColorPicker implements UIComponent {
 
     private int x;
     private int y;
@@ -25,7 +25,7 @@ public class ColorPicker {
         this.height = height;
         background = null ;
         currColor = new Color(0, 0, 0);
-        try {background = ImageIO.read(new File("colorPicker.jpg")); } catch (Exception e) {}
+        try {background = ImageIO.read(new File("assets/colorPicker.jpg")); } catch (Exception e) {}
     }
 
     public Color pick(int mouseX, int mouseY) {
@@ -50,5 +50,21 @@ public class ColorPicker {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Color getColor() {
+        return currColor;
+    }
+
+    public int barHeight() {
+        return barHeight;
     }
 }
