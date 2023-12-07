@@ -19,7 +19,7 @@ import src.UIComponent.ColorPicker;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
-public class UI extends Canvas implements KeyListener, MouseListener, Runnable, MouseMotionListener {
+public class UI extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private ColorPicker cp;
     private paint p;
@@ -30,6 +30,7 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
     private boolean mouseDown = false;
     private int mouseX = 0;
     private int mouseY = 0;
+    private boolean[] keys = new boolean[2];
 
     public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;
@@ -42,7 +43,6 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
 
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
-        this.addKeyListener(this);
         new Thread(this).start();
     }
 
@@ -60,17 +60,40 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
         g.drawRect(x-2, y-1, width+2, height+2);
         if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
+        } 
+        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()*3&&mouseX<=cp.getX()+cp.getWidth()-cp.barHeight()*2&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
+            if (keys[0]) cp.changeRed(1);
+            if (keys[1]) cp.changeRed(-1);
         }
+        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()*2&&mouseX<=cp.getX()+cp.getWidth()-cp.barHeight()&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
+            if (keys[0]) cp.changeGreen(1);
+            if (keys[1]) cp.changeGreen(-1);
+        }
+        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
+            if (keys[0]) cp.changeBlue(1);
+            if (keys[1]) cp.changeBlue(-1);
+        }
+        p.recolor(cp.getColor());
         cp.draw(window);
         
         Graphics2D g2dComponent = (Graphics2D) window;
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
-    public void keyPressed(KeyEvent e) {
-
+    public void keyPress(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            keys[0] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            keys[1] = true;
+        }
     }
-    public void keyReleased(KeyEvent e) {
-
+    public void keyRelease(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            keys[0] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            keys[1] = false;
+        }
     }
     public void keyTyped(KeyEvent e) {
 

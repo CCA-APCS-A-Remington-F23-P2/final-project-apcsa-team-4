@@ -50,7 +50,10 @@ public class ColorPicker implements UIComponent {
         g.fillRect(width-barHeight*2, y+height-barHeight, barHeight, barHeight);
         g.setColor(new Color(0, 0, currColor.getBlue()));
         g.fillRect(width-barHeight, y+height-barHeight, barHeight, barHeight);
-
+        g.setColor(Color.WHITE);
+        g.drawRect(width-barHeight*3, y+height-barHeight, barHeight, barHeight);
+        g.drawRect(width-barHeight*2, y+height-barHeight, barHeight, barHeight);
+        g.drawRect(width-barHeight*1, y+height-barHeight, barHeight, barHeight);
         Graphics2D g2dComponent = (Graphics2D) window;
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
@@ -77,5 +80,20 @@ public class ColorPicker implements UIComponent {
 
     public int barHeight() {
         return barHeight;
+    }
+
+    public void changeRed(int i) {
+        if (currColor.getRed()+i<256&&currColor.getRed()+i>=0)
+        currColor = new Color(currColor.getRed()+i, currColor.getGreen(), currColor.getBlue());
+    }
+
+    public void changeGreen(int i) {
+        if (currColor.getGreen()+i<256&&currColor.getGreen()+i>=0)
+        currColor = new Color(currColor.getRed(), currColor.getGreen()+i, currColor.getBlue());
+    }
+
+    public void changeBlue(int i) {
+        if (currColor.getBlue()+i<256&&currColor.getBlue()+i>=0)
+        currColor = new Color(currColor.getRed(), currColor.getGreen(), currColor.getBlue()+i);
     }
 }

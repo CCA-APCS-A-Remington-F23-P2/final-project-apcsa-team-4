@@ -31,6 +31,7 @@ public class Window extends JFrame {
 
     private keyLis kl;
     private paint p;
+    private UI u;
 
 
     public Window() {
@@ -52,7 +53,7 @@ public class Window extends JFrame {
         try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
 
         p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
-        UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
+        u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         ((Component)p).setFocusable(false);
         ((Component)u).setFocusable(false);
 
@@ -93,8 +94,11 @@ public class Window extends JFrame {
     }
     public void keyHandle(KeyEvent e) {
         p.keyPress(e);
+        u.keyPress(e);
+
     }
     public void keyHandleRelease(KeyEvent e) {
         p.keyRelease(e);
+        u.keyRelease(e);
     }
 }
