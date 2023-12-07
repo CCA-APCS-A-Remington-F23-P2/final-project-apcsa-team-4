@@ -121,9 +121,13 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         this.y = y;
     }
     public void keyPress(KeyEvent e) {
-
+       if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+           shiftDraw = true;
+       }
     }
     public void keyRelease(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDraw = false;
+        }
     }
 }
