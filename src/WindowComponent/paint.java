@@ -32,7 +32,8 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     private int mouseX = 0;
     private int mouseY = 0;
     private long systime = 0;
-
+    private static final long LINEDELAY = 30;
+    private long clickTime = 0;
 
     public paint(int cWidth, int cHeight, int x, int y) {
         col = new Color(0, 0, 0);
@@ -96,6 +97,7 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public void mouseEntered(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {
         mouseDown = true;
+        clickTime = systime;
     }
 
     public Dimension getPreferredSize() {return new Dimension(width, height);}
@@ -110,7 +112,7 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     }
     public void mouseDragged(MouseEvent e) {
         mouseDown = true;
-        inDraw = true;
+        if (systime > clickTime + LINEDELAY) inDraw = true;
 
         mouseX = e.getX()-x;
         mouseY = e.getY()-y;
