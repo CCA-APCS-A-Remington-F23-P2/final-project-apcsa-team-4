@@ -31,7 +31,7 @@ public class Window extends JFrame {
     public Window() {
         super("Paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
-        File img = new File("cursor.png");
+        File img = new File("assets/cursor.png");
         try {
              in = ImageIO.read(img);
         } catch (IOException ex) {
@@ -40,7 +40,7 @@ public class Window extends JFrame {
             System.exit(1);
         }
         setSize(WIDTH,HEIGHT);
-        try {setIconImage(ImageIO.read(new File("logo.png"))); } catch (Exception e) {};
+        try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
         
 
         paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
@@ -51,7 +51,7 @@ public class Window extends JFrame {
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
         
-        Image brush = new ImageIcon("newBrush.png").getImage();
+        Image brush = new ImageIcon("assets/newBrush.png").getImage();
 
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent evt) {
@@ -67,7 +67,7 @@ public class Window extends JFrame {
         ));
 
         u.setCursor(getToolkit().createCustomCursor(
-            new ImageIcon("cursor.png").getImage(),
+            new ImageIcon("assets/cursor.png").getImage(),
             new Point(0,0),
             "cursor"
         ));
