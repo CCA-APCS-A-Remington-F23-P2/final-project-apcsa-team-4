@@ -74,6 +74,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         systime = System.currentTimeMillis();
         paint(window);
     }
+    
     public void paint(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();

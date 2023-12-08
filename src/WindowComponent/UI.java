@@ -33,6 +33,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     private int mouseY = 0;
     private boolean[] keys = new boolean[2];
     private boolean[] keysPrev = new boolean[2];
+    public boolean mouseClick = false;
 
     public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;
@@ -59,6 +60,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     public void paint(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
+        System.out.println(mouseClick);
         g.clearRect(x, y, width, height);
         g.setStroke(new BasicStroke(3));
         g.drawRect(x-2, y-1, width+2, height+2);
@@ -66,19 +68,19 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             p.recolor(cp.pick(mouseX, mouseY));
         } 
 
-        if (ls.getNewLayerButton().isClicked(mouseX, mouseY, mouseDown)) {
+        if (ls.getNewLayerButton().isClicked(mouseX, mouseY, mouseClick)) {
             ls.addLayer(p.addLayer());
         }
 
         for (int i = 0; i < ls.getLayers().size(); i++) {
             LayerUI layer = ls.getLayers().get(i);
 
-            if (layer.isClicked(mouseX, mouseY, mouseDown)) {
+            if (layer.isClicked(mouseX, mouseY, mouseClick)) {
                 ls.setSelectedLayer(ls.getLayers().indexOf(layer));
                 p.setCurr(ls.getLayers().indexOf(layer));
             }
 
-            if (layer.getDeleteButton().isClicked(mouseX, mouseY, mouseDown)) {
+            if (layer.getDeleteButton().isClicked(mouseX, mouseY, mouseClick)) {
                 if (ls.getLayers().indexOf(layer)==ls.getSelectedLayer()) {
                     ls.setSelectedLayer(0);
                     p.setCurr(0);
@@ -113,6 +115,8 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         p.recolor(cp.getColor());
         cp.draw(g);
         ls.draw(g);
+
+        mouseClick = false;
         
         Graphics2D g2dComponent = (Graphics2D) window;
         g2dComponent.drawImage(bufferedImage, null, x, y); 
@@ -150,6 +154,8 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         }
   }
     public void mouseClicked(MouseEvent e) {
+        mouseClick = true;
+        System.out.println("mouseclick");
     }
     public void mouseExited(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
@@ -161,6 +167,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
 
     public void mouseReleased(MouseEvent e) {
         mouseDown = false;
+        mouseClick = false;
     }
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX()-x;

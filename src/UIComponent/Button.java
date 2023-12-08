@@ -14,8 +14,6 @@ public class Button implements UIComponent{
     private int height;
     private Color color;
     private ImageIcon image;
-    private static boolean prevMousePressed = false;
-    private double prevPressTime = System.currentTimeMillis();
 
 
     public Button(int x, int y, int width, int height) {
@@ -93,14 +91,15 @@ public class Button implements UIComponent{
 
     public boolean isClicked(int mouseX, int mouseY, boolean mousePressed) {
         if (mouseX>=x&&mouseX<=x+width&&mouseY>=y&&mouseY<=y+height) {
-            if (mousePressed&&!prevMousePressed) {
+            if (mousePressed) {
                 pressed = true;
-                prevPressTime = System.currentTimeMillis();
             } else {
                 pressed = false;
             }
+        } else {
+            pressed = false;
         }
-        prevMousePressed = mousePressed;
-        return pressed; 
+
+        return pressed;
     }
 }
