@@ -1,11 +1,11 @@
 package src.UIComponent;
+import src.WindowComponent.Layer;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JSlider;
 
-import src.WindowComponent.Layer;
 
 public class LayerUI extends Button implements UIComponent{
     private Layer layer;

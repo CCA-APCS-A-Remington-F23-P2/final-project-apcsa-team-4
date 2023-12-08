@@ -1,6 +1,5 @@
 //This class allows switching between the fill and paint tools
 package src.UIComponent;
-
 public class ToolPicker {
     private boolean fillToolSelected;
     private boolean paintToolSelected;

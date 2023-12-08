@@ -1,4 +1,7 @@
 package src.UIComponent;
+
+import src.WindowComponent.Layer;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -6,20 +9,18 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import src.UIComponent.Button;
 
 import javax.imageio.ImageIO;
 
-import src.WindowComponent.Layer;
 
 public class LayerSelector implements UIComponent {
-    private ArrayList<LayerUI> layers;
+    private final ArrayList<LayerUI> layers;
     private int x;
     private int y;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private int selectedLayer; 
-    private Button newLayerButton;
+    private final Button newLayerButton;
 
     public LayerSelector(int x, int y, int width, int height) {
         this.x = x;

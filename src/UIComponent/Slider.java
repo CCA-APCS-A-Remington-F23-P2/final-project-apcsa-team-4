@@ -1,8 +1,7 @@
-package src.UIComponent;
 
+package src.UIComponent;
 import javax.swing.*;
 
-import src.UIComponent.UIComponent;
 
 import java.awt.*;
 

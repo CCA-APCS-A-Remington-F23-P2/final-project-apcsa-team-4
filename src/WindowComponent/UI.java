@@ -1,25 +1,23 @@
 package src.WindowComponent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
-import java.awt.Canvas;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 import src.UIComponent.ColorPicker;
 import src.UIComponent.LayerSelector;
 import src.UIComponent.LayerUI;
 
-import java.awt.event.MouseMotionListener;
+import java.awt.BasicStroke;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+
+
 
 public class UI extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 

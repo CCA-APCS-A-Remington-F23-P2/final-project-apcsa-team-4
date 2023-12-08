@@ -1,5 +1,4 @@
 package src.UIComponent;
-
 public interface UIComponent {
     public int getX();
     public int getY();
