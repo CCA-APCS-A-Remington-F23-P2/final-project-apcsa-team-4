@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 import javax.imageio.ImageIO;
 
@@ -26,7 +27,7 @@ public class LayerSelector implements UIComponent {
         this.x = x;
         this.y = y;
         layers = new ArrayList<LayerUI>();
-        newLayerButton = new Button(x, y, width/20, width/20);
+        newLayerButton = new Button(x, y, width/10, width/10, new ImageIcon("assets/icons/plus.png"));
         this.width = width;
         this.height = height;
     }
@@ -60,7 +61,7 @@ public class LayerSelector implements UIComponent {
     }
 
     public void addLayer(Layer layer) {
-            layers.add(new LayerUI(layer, x, y + newLayerButton.getHeight() + (height/6) * layers.size(), width, height/6));
+            layers.add(new LayerUI(layer, x, y + newLayerButton.getHeight() + 1 + ((height/12)+2) * layers.size(), width, height/12));
     }
 
     public Button getNewLayerButton() {
@@ -71,7 +72,6 @@ public class LayerSelector implements UIComponent {
     public void draw(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
-        System.out.println(layers.size());
         
         window.setColor(new Color(170, 170, 170));
         window.fillRect(x, y, width, height);
@@ -80,17 +80,18 @@ public class LayerSelector implements UIComponent {
         for (int i = 0; i < layers.size(); i++) {
             LayerUI layer = layers.get(i);
 
+            layer.draw(g);
+
+            window.setColor(new Color(230, 230, 230));
+            window.fillRect(layer.getX()+1, layer.getY()+1, layer.getWidth()-2, layer.getHeight()-3);
+
             if (layers.indexOf(layer)==selectedLayer) {
                 window.setColor(new Color(0, 0, 0));
-                window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
+                window.drawRect(layer.getX()+1, layer.getY()+1, layer.getWidth()-2, layer.getHeight()-3);
             } else {
                 window.setColor(new Color(170, 170, 170));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
             }
-
-            
-
-            layer.draw(g);
         }
         Graphics2D g2dComponent = (Graphics2D) window;
         
@@ -120,8 +121,8 @@ public class LayerSelector implements UIComponent {
     public void removeLayer(int indexOf) {
         layers.remove(indexOf);
         for (int i = indexOf ; i < layers.size(); i++) {
-            layers.get(i).getDeleteButton();
-            layers.get(i).setY(layers.get(i).getY()-height/6);
+            layers.get(i).setY(layers.get(i).getY()-height/12-2);
         }
+        if (layers.size()==1) setSelectedLayer(0);
     }
 }

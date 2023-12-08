@@ -60,10 +60,9 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     public void paint(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
-        System.out.println(mouseClick);
-        g.clearRect(x, y, width, height);
         g.setStroke(new BasicStroke(3));
-        g.drawRect(x-2, y-1, width+2, height+2);
+        g.clearRect(x, y, width, height);
+        
         if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
         } 
@@ -110,13 +109,15 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             if (keys[1]) cp.changeBlue(-1);
         }
 
-
-
         p.recolor(cp.getColor());
         cp.draw(g);
         ls.draw(g);
 
         mouseClick = false;
+
+        g.setColor(new Color(130, 130, 130));
+        g.setStroke(new BasicStroke(1));
+        g.drawRect(x-2, y-1, width, height+2);
         
         Graphics2D g2dComponent = (Graphics2D) window;
         g2dComponent.drawImage(bufferedImage, null, x, y); 
@@ -155,7 +156,6 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
   }
     public void mouseClicked(MouseEvent e) {
         mouseClick = true;
-        System.out.println("mouseclick");
     }
     public void mouseExited(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}

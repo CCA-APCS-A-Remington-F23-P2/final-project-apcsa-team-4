@@ -38,8 +38,7 @@ public class Window extends JFrame {
         super("Paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
 
-        kl = new keyLis();
-        kl.parent = this;
+        
 
         File img = new File("assets/cursor.png");
         try {
@@ -53,8 +52,8 @@ public class Window extends JFrame {
         try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
 
 
-        paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
-        UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
+        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
 
         ((Component)p).setFocusable(false);
@@ -90,11 +89,14 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
 
+
+        kl = new keyLis(this);
         this.addKeyListener(kl);
 
         // getContentPane().setLayout(new FlowLayout());
         setVisible(true);
     }
+
     public void keyHandle(KeyEvent e) {
         p.keyPress(e);
         u.keyPress(e);
