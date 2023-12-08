@@ -51,6 +51,10 @@ public class LayerSelector implements UIComponent {
         return height;
     }
 
+    public int getSelectedLayer() {
+        return selectedLayer;
+    }
+
     public ArrayList<LayerUI> getLayers() {
         return layers;
     }
@@ -65,10 +69,17 @@ public class LayerSelector implements UIComponent {
 
     @Override
     public void draw(Graphics window) {
-        newLayerButton.draw(window);
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bufferedImage.createGraphics();
+        System.out.println(layers.size());
         
+        window.setColor(new Color(170, 170, 170));
+        window.fillRect(x, y, width, height);
+        newLayerButton.draw(window);
 
-        for (LayerUI layer : layers) {
+        for (int i = 0; i < layers.size(); i++) {
+            LayerUI layer = layers.get(i);
+
             if (layers.indexOf(layer)==selectedLayer) {
                 window.setColor(new Color(0, 0, 0));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
@@ -79,11 +90,38 @@ public class LayerSelector implements UIComponent {
 
             
 
-            layer.draw(window);
+            layer.draw(g);
         }
+        Graphics2D g2dComponent = (Graphics2D) window;
+        
+        g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
 
     public void setSelectedLayer(int indexOf) {
         selectedLayer = indexOf;
+    }
+
+
+    public void moveLayerUp(int indexOf) {
+        if (indexOf==0) return;
+        LayerUI temp = layers.get(indexOf);
+        layers.set(indexOf, layers.get(indexOf-1));
+        layers.set(indexOf-1, temp);
+    }
+
+    public void moveLayerDown(int indexOf) {
+        if (indexOf==layers.size()-1) return;
+        LayerUI temp = layers.get(indexOf);
+        layers.set(indexOf, layers.get(indexOf+1));
+        layers.set(indexOf+1, temp);
+    }
+
+
+    public void removeLayer(int indexOf) {
+        layers.remove(indexOf);
+        for (int i = indexOf ; i < layers.size(); i++) {
+            layers.get(i).getDeleteButton();
+            layers.get(i).setY(layers.get(i).getY()-height/6);
+        }
     }
 }

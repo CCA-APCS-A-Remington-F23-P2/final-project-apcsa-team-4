@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
+    private UI ui;
     private ArrayList<Layer> layers;
     private Layer curr;
     private Brush b;
@@ -63,20 +64,30 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         new Thread(this).start();
     }
 
+
+    public void setUI(UI ui) {
+        this.ui = ui;
+    }
+
     public void update(Graphics window)
     {
         systime = System.currentTimeMillis();
         paint(window);
     }
     public void paint(Graphics window) {
-        Graphics2D g = (Graphics2D) window;
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bufferedImage.createGraphics();
         g.setStroke(new BasicStroke(3));
-
+        g.clearRect(0, 0, width, height);
+        g.setColor(new Color(200, 200, 200));
+        g.fillRect(0, 0, width, height);
         g.setColor(new Color(170, 170, 170));
-        g.drawRect(x-2, y-1, width+4, height+3);
+        g.drawRect(0, 0, width, height);
+
         for (Layer l:layers) {
-            window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
+            g.drawImage(l.getImage(),0,0, null);
         }
+
         if (!erase) {
             if (mouseDown && !fill) {
                 curr.draw(b, mouseX, mouseY, inDraw || shiftDraw);
@@ -90,6 +101,8 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
                 curr.fill(eraser, mouseX, mouseY);
             }
         }
+        Graphics2D g2dComponent = (Graphics2D) window;
+        g2dComponent.drawImage(bufferedImage, null, x, y); 
     }
     public void run()
     {
@@ -172,4 +185,17 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
            erase = false;
        }
     }
+
+    public void removeLayer(int index) {
+        layers.remove(index);
+    }
+
+    //hide layer
+    public void hideLayer(Layer l) {
+        l.setVisible(false);
+    }
+
+    //move layer up
+
+    //move layer down
 }

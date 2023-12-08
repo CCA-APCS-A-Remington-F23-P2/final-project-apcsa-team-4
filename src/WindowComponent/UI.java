@@ -32,7 +32,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     private int mouseX = 0;
     private int mouseY = 0;
     private boolean[] keys = new boolean[2];
-    private boolean[]keysPrev = new boolean[2];
+    private boolean[] keysPrev = new boolean[2];
 
     public UI(int cWidth, int cHeight, int x, int y, paint p) {
         this.x = x;
@@ -57,11 +57,10 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     }
 
     public void paint(Graphics window) {
-        BufferedImage bufferedImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
-        
+        g.clearRect(x, y, width, height);
         g.setStroke(new BasicStroke(3));
-        g.setColor(new Color(170, 170, 170));
         g.drawRect(x-2, y-1, width+2, height+2);
         if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
@@ -71,10 +70,28 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             ls.addLayer(p.addLayer());
         }
 
-        for (LayerUI layer : ls.getLayers()) {
+        for (int i = 0; i < ls.getLayers().size(); i++) {
+            LayerUI layer = ls.getLayers().get(i);
+
             if (layer.isClicked(mouseX, mouseY, mouseDown)) {
                 ls.setSelectedLayer(ls.getLayers().indexOf(layer));
                 p.setCurr(ls.getLayers().indexOf(layer));
+            }
+
+            if (layer.getDeleteButton().isClicked(mouseX, mouseY, mouseDown)) {
+                if (ls.getLayers().indexOf(layer)==ls.getSelectedLayer()) {
+                    ls.setSelectedLayer(0);
+                    p.setCurr(0);
+                }
+
+                if (ls.getLayers().size()==1) {
+                    ls.addLayer(p.addLayer());
+                }
+
+                int index = ls.getLayers().indexOf(layer);
+
+                ls.removeLayer(index);
+                p.removeLayer(index);
             }
         }
 
@@ -90,13 +107,18 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             if (keys[0]) cp.changeBlue(1);
             if (keys[1]) cp.changeBlue(-1);
         }
+
+
+
         p.recolor(cp.getColor());
-        cp.draw(window);
-        ls.draw(window);
+        cp.draw(g);
+        ls.draw(g);
         
         Graphics2D g2dComponent = (Graphics2D) window;
-        g2dComponent.drawImage(bufferedImage, null, 0, 0); 
+        g2dComponent.drawImage(bufferedImage, null, x, y); 
     }
+    
+
     public void keyPress(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             keys[0] = true;
@@ -149,5 +171,10 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
 
         mouseX = e.getX()-x;
         mouseY = e.getY()-y;
+    }
+
+
+    public LayerSelector getLayerSelector() {
+        return ls;
     }
 }

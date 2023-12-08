@@ -46,6 +46,7 @@ public class Window extends JFrame {
 
         paint p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         UI u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
+        p.setUI(u);
         ((Component)p).setFocusable(false);
         ((Component)u).setFocusable(false);
 

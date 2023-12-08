@@ -21,6 +21,7 @@ public class Layer {
     private int y;
     private int windowX;
     private int windowY;
+    private boolean visible = true;
 
     public Layer(int width, int height, int windowX, int windowY) {
         buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -37,7 +38,16 @@ public class Layer {
     public int getY() {
         return y;
     }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public void draw(Brush b, int x, int y, boolean dl) {
+        if (!visible) {
+            return;
+        }
+
         b.draw(g, x, y, dl);
     }
 
