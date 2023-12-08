@@ -2,6 +2,7 @@ package src.UIComponent;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import src.WindowComponent.Window;
 
 public class keyLis extends KeyAdapter {
 

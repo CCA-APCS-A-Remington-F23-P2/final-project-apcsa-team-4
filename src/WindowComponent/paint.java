@@ -70,12 +70,14 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
     public void paint(Graphics window) {
         Graphics2D g = (Graphics2D) window;
+        BufferedImage bufferedImage = new BufferedImage(500, 400, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = bufferedImage.createGraphics();
         g.setStroke(new BasicStroke(3));
 
         g.setColor(new Color(170, 170, 170));
         g.drawRect(x-2, y-1, width+4, height+3);
         for (Layer l:layers) {
-            window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
+            g2.drawImage(l.getImage(),0, 0, null);
         }
         if (!erase) {
             if (mouseDown && !fill) {
@@ -90,6 +92,8 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
                 curr.fill(eraser, mouseX, mouseY);
             }
         }
+        Graphics2D g2dComponent = (Graphics2D) window;
+        g2dComponent.drawImage(bufferedImage, null, x, y); 
     }
     public void run()
     {
