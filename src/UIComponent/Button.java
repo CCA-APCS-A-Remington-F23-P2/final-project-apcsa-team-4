@@ -65,10 +65,10 @@ public class Button implements UIComponent{
         if (image!=null) {
             window.drawImage(image.getImage(), x, y, width, height, null);
             return;
+        } else {
+            window.setColor(color);
+            window.drawRect(x, y, width, height);
         }
-
-        window.setColor(color);
-        window.drawRect(x, y, width, height);
     }
 
 

@@ -8,6 +8,10 @@ public class keyLis extends KeyAdapter {
 
     public Window parent;
 
+    public keyLis(Window parent) {
+        this.parent = parent;
+    }
+
     public void keyPressed(KeyEvent e) {
         parent.keyHandle(e);
     }
