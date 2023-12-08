@@ -21,15 +21,20 @@ public class Layer {
     private int y;
     private int windowX;
     private int windowY;
-    private boolean visible = true;
+    private boolean visible;
 
     public Layer(int width, int height, int windowX, int windowY) {
         buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g = buf.createGraphics();
         this.windowX = windowX;
         this.windowY = windowY;
+        visible = true;
     }
     public BufferedImage getImage() {
+        if (!visible) {
+            return new BufferedImage(buf.getWidth(), buf.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        }
+
         return buf;
     }
     public int getX() {
@@ -39,15 +44,16 @@ public class Layer {
         return y;
     }
 
+    public boolean getVisible() {
+        return visible;
+    }
+
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
     public void draw(Brush b, int x, int y, boolean dl) {
-        if (!visible) {
-            return;
-        }
-
+       // System.out.println(visible);
         b.draw(g, x, y, dl);
     }
 

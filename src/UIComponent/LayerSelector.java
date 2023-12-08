@@ -71,7 +71,6 @@ public class LayerSelector implements UIComponent {
     public void draw(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
-        System.out.println(layers.size());
         
         window.setColor(new Color(170, 170, 170));
         window.fillRect(x, y, width, height);

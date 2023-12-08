@@ -95,6 +95,19 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
                 ls.removeLayer(index);
                 p.removeLayer(index);
             }
+
+
+            if (layer.getHideButton().isClicked(mouseX, mouseY, mouseClick)) {
+               // System.out.println(p.getLayers().get(i).getVisible());
+                if (p.getLayers().get(i).getVisible()) {
+                    p.getLayers().get(i).setVisible(false);
+                } else {
+                   // p.removeLayer(i);
+                   p.getLayers().get(i).setVisible(true);
+                }
+
+
+            }
         }
 
         if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()*3&&mouseX<=cp.getX()+cp.getWidth()-cp.barHeight()*2&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
