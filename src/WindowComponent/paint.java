@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
-
-public class paint extends Canvas implements KeyListener, MouseListener, Runnable, MouseMotionListener {
+public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
     private ArrayList<Layer> layers;
@@ -34,11 +33,21 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     private long systime = 0;
     private static final long LINEDELAY = 30;
     private long clickTime = 0;
+    private boolean shiftDraw = false;
+    private boolean fill = false;
+    private Brush eraser;
+    private boolean erase = false;
 
     public paint(int cWidth, int cHeight, int x, int y) {
+
+        setVisible(true);
+        setFocusable(true);
+
         col = new Color(0, 0, 0);
         layers = new ArrayList<Layer>();
         b = new Brush(new Rectangle(0, 0, 20, 20));
+        eraser = new Brush(new Rectangle(0, 0, 20, 20));
+        eraser.recolor(new Color(255, 255, 255));
         curr = new Layer(cWidth, cHeight, x, y);
         layers.add(curr);
         this.x = x;
@@ -49,7 +58,6 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
 
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
-        this.addKeyListener(this);
         new Thread(this).start();
     }
 
@@ -67,18 +75,19 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
         for (Layer l:layers) {
             window.drawImage(l.getImage(),l.getX()+x,l.getY()+y, null);
         }
-        if (mouseDown) {
-            curr.draw(b, mouseX, mouseY, inDraw);
+        if (!erase) {
+            if (mouseDown && !fill) {
+                curr.draw(b, mouseX, mouseY, inDraw || shiftDraw);
+            } else if (mouseDown && fill) {
+                curr.fill(b, mouseX, mouseY);
+            }
+        } else {
+            if (mouseDown && !fill) {
+                curr.draw(eraser, mouseX, mouseY, inDraw || shiftDraw);
+            } else if (mouseDown && fill) {
+                curr.fill(eraser, mouseX, mouseY);
+            }
         }
-    }
-    public void keyPressed(KeyEvent e) {
-
-    }
-    public void keyReleased(KeyEvent e) {
-
-    }
-    public void keyTyped(KeyEvent e) {
-
     }
     public void run()
     {
@@ -138,5 +147,27 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
     public Layer addLayer() {
         layers.add(new Layer(width, height, x, y));
         return layers.get(layers.size()-1);
+    }
+    public void keyPress(KeyEvent e) {
+       if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+           shiftDraw = true;
+       }
+       if (e.getKeyCode() == KeyEvent.VK_F) {
+           fill = true;
+       }
+       if (e.getKeyCode() == KeyEvent.VK_E) {
+           erase = true;
+       }
+    }
+    public void keyRelease(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDraw = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+           fill = false;
+       }
+       if (e.getKeyCode() == KeyEvent.VK_E) {
+           erase = false;
+       }
     }
 }

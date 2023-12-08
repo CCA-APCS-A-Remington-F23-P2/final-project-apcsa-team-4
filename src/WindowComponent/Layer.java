@@ -39,4 +39,42 @@ public class Layer {
     public void draw(Brush b, int x, int y, boolean dl) {
         b.draw(g, x, y, dl);
     }
+
+    public void fill(Brush b, int x, int y) {
+        // Floodfill algorithm for this layer
+        if (x < 0 || x >= buf.getWidth() || y < 0 || y >= buf.getHeight()) {
+            return;
+        }
+        
+        int targetColor = buf.getRGB(x, y);
+        int fillColor = b.getColor().getRGB();
+        
+        if (targetColor == fillColor) {
+            return;
+        }
+        
+        ArrayList<int[]> queue = new ArrayList<>();
+        queue.add(new int[]{x, y});
+        
+        while (!queue.isEmpty()) {
+            int[] pixel = queue.remove(queue.size() - 1);
+            int px = pixel[0];
+            int py = pixel[1];
+            
+            if (px < 0 || px >= buf.getWidth() || py < 0 || py >= buf.getHeight()) {
+                continue;
+            }
+            
+            if (buf.getRGB(px, py) != targetColor) {
+                continue;
+            }
+            
+            buf.setRGB(px, py, fillColor);
+            
+            queue.add(new int[]{px - 1, py});
+            queue.add(new int[]{px + 1, py});
+            queue.add(new int[]{px, py - 1});
+            queue.add(new int[]{px, py + 1});
+        }
+    }
 }
