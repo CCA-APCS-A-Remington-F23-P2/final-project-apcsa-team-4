@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import src.UIComponent.ColorPicker;
+import src.UIComponent.LayerSelector;
+import src.UIComponent.LayerUI;
 
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
@@ -22,6 +24,7 @@ import java.awt.event.MouseEvent;
 public class UI extends Canvas implements KeyListener, MouseListener, Runnable, MouseMotionListener {
 
     private ColorPicker cp;
+    private LayerSelector ls;
     private paint p;
     private int width;
     private int height;
@@ -37,6 +40,9 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
         this.y = y;
         this.p = p;
         cp = new ColorPicker(x, y, cWidth-1, cWidth-1);
+        ls = new LayerSelector(x, y+cWidth-1, cWidth-1, cHeight-1 - cWidth+1);
+
+        ls.addLayer(p.getCurr());
 
         width = cWidth;
         height = cHeight;
@@ -62,7 +68,20 @@ public class UI extends Canvas implements KeyListener, MouseListener, Runnable, 
         if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
         }
+
+        if (ls.getNewLayerButton().isClicked(mouseX, mouseY, mouseDown)) {
+            ls.addLayer(p.addLayer());
+        }
+
+        for (LayerUI layer : ls.getLayers()) {
+            if (layer.isClicked(mouseX, mouseY, mouseDown)) {
+                ls.setSelectedLayer(ls.getLayers().indexOf(layer));
+                p.setCurr(ls.getLayers().indexOf(layer));
+            }
+        }
+
         cp.draw(window);
+        ls.draw(window);
         
         Graphics2D g2dComponent = (Graphics2D) window;
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 

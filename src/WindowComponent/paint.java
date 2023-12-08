@@ -126,4 +126,17 @@ public class paint extends Canvas implements KeyListener, MouseListener, Runnabl
         this.x = x;
         this.y = y;
     }
+
+    public Layer getCurr() {
+        return curr;
+    }
+    public void setCurr(int index) {
+        curr = layers.get(index);
+    }
+
+    //create a new layer and then return it
+    public Layer addLayer() {
+        layers.add(new Layer(width, height, x, y));
+        return layers.get(layers.size()-1);
+    }
 }

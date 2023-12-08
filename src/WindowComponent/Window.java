@@ -17,8 +17,8 @@ import java.io.IOException;
 
 public class Window extends JFrame {
 
-    public static final int PROJECT_WIDTH = 500;
-    public static final int PROJECT_HEIGHT = 400;
+    public static final int PROJECT_WIDTH = 700;
+    public static final int PROJECT_HEIGHT = 700;
 
     public static final int UI_WIDTH = 200;
 

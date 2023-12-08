@@ -15,6 +15,7 @@ import java.util.Date;
 public class Layer {
     private BufferedImage buf;
     private Graphics g;
+    private int alpha;
     private int x;
     private int y;
     private int windowX;
