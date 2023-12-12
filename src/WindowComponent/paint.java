@@ -230,10 +230,10 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
            erase = false;
        }
        if (e.getKeyCode() == KeyEvent.VK_OPEN_BRACKET) {
-            b.resize(-10);
+            b.resize(-3);
        }
        if (e.getKeyCode() == KeyEvent.VK_CLOSE_BRACKET) {
-            b.resize(10);
+            b.resize(3);
        }
     }
 
@@ -253,6 +253,21 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         Layer temp = layers.get(index1);
         layers.set(index1, layers.get(index2));
         layers.set(index2, temp);
+    }
+
+
+    public BufferedImage getBufferedImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bufferedImage.createGraphics();
+        g.setColor(new Color(200, 200, 200));
+        g.fillRect(0, 0, width, height);
+        g.setColor(new Color(170, 170, 170));
+        g.drawRect(0, 0, width, height);
+
+        for (Layer l:layers) {
+            g.drawImage(l.getImage(),0,0, null);
+        }
+        return bufferedImage;
     }
 
     public void importImage(BufferedImage img) {
