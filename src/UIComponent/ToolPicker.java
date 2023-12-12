@@ -1,10 +1,12 @@
 package src.UIComponent;
 //This class allows switching between the fill and paint tools
 
+import java.awt.Graphics;
 
-public class ToolPicker {
+public class ToolPicker extends UIComponent {
     private boolean fillToolSelected;
     private boolean paintToolSelected;
+    private int 
 
     public ToolPicker() {
         fillToolSelected = false;
@@ -27,5 +29,9 @@ public class ToolPicker {
 
     public boolean isPaintToolSelected() {
         return paintToolSelected;
+    }
+
+    public void draw(Graphics window) {
+        //This should draw a nice GUI for tool picker
     }
 }

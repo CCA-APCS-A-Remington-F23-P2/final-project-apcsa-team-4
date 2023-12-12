@@ -61,13 +61,13 @@ public class Window extends JFrame {
 
         JMenuBar menubar = new JMenuBar();
         JMenu menu = new JMenu("File");
-        JMenuItem size = new JMenuItem(new AbstractAction("Save") {
+        JMenuItem save = new JMenuItem(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent ae) {
-                imageExport.export("help", p.getBufferedImage());
+                imageExport.export(null, p.getBufferedImage());
             }
         });
         
-        menu.add(size);
+        menu.add(save);
         menubar.add(menu);
         setJMenuBar(menubar);
 
