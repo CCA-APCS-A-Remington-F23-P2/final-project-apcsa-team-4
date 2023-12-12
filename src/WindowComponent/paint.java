@@ -117,7 +117,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     {
         try {
             while(true) {
-                Thread.currentThread().sleep(10);
+                Thread.currentThread().sleep(2);
                 repaint();
             }
         }catch(Exception e) {

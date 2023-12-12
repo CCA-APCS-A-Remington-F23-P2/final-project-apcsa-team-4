@@ -77,6 +77,7 @@ public class LayerSelector implements UIComponent {
         
         window.setColor(new Color(170, 170, 170));
         window.fillRect(x, y, width, height);
+        
         newLayerButton.draw(window);
         moveDownButton.draw(window);
         moveUpButton.draw(window);
@@ -84,7 +85,7 @@ public class LayerSelector implements UIComponent {
         for (int i = 0; i < layers.size(); i++) {
             LayerUI layer = layers.get(i);
 
-            if (layer.getY() > height-layer.getHeight()) {
+            if (layer.getY() > y + height-layer.getHeight()) {
                 break;
             }
 
