@@ -1,29 +1,52 @@
-> # APCS-A FinalProject
-> ## Description
 
-> The final project for the APCSA class is designed to put the Java knowledge and skills you have learned during the course into practice.
-> You will be expected to design, implement, and test a complete project written in the Java programming language.  The project should be unique.
-> - Not the same as others in the class
-> - If it is a game or simulation it should be implemented in a unique way (different rules of play) Not just a version of an existing game.
+# Welcome to Paint --!
 
-> ## General Requirements:
+Welcome to Paint --, a cutting-edge paint program that seamlessly integrates AI features, a sophisticated user interface, and a range of tools to enhance your creative experience.
 
-> - Complete a project of your choosing in the Java programming language written from scratch by a team of up to four people
-> - Must contain a graphical and persistent data component (settings or data should save and laod on exit and start of the program)
-> - Must have a detailed project proposal signed off by the teacher before beginning development.  After an initial research period, this document may not be changed without approval.
-> - The Java code must use OO design/programming techniques, with appropriate use of abstraction, encapsulation,  inheritance, and polymorphism.
-> - Each individual team member will be primarily responsible for the design and implementation of at least one of the main classes and persistent data set in the program.  This class will form the basis for the individual project write up and individual code review.  This class will demonstrate OO design principles including abstraction, encapsulation,  inheritance, and polymorphism.
-> - Must have a group project write up which describes how the overall program works to fulfill the project objectives.
-> - Must have an INDIVIDUAL write up by each team member focusing on their programming contribution and demonstrating their OO programming skills. 
-> - Must be able to be compiled and run in a standard Java on CodeSpaces or other IDE and must include a YouTube video demonstrating the program running correctly and fulfilling the objectives.
-> - All files must be added and changes committed often to the Github Classroom assignment repository. 
+## Features
 
-> ## Submission Requirements
+### 1. AI Integration
 
-> - Team submit: a Project Proposal (in Google Classroom)
-> - Individually all students submit: a daily progress journal (in Google Classroom)
-> - Individually all students submit: a 'Individual Project Write Up' (in Google Classroom)
-> - Team submit: a 'Group Project Write Up' (in Google Classroom)..
-> - Team submit: a YouTube video demonstrating the final program running correctly and meeting the objectives of the project
-> - All code must be submitted in a Java/Java Swing program that compiles and runs without errors and fulfills the objectives of the project.  
-> - Submit all code to the Github Classroom assignment repository.
+Paint -- comes equipped with built-in ChatGPT, providing you with an intelligent assistant right at your fingertips. Whether you need creative suggestions, assistance with techniques, or just want to chat while you paint, the AI integration is here to enhance your artistic journey.
+
+### 2. Advanced UI
+
+Our paint program boasts an advanced user interface designed to make your creative process smooth and enjoyable. The UI includes the following features:
+
+-   **Color Picker:** Easily select the perfect hue from a wide range of colors.
+-   **Layers:** Organize your artwork efficiently with layers, allowing for greater control over your composition.
+-   **Intuitive Tools:** Access a variety of tools, brushes, and effects in a user-friendly manner.
+
+### 3. Fluid and Intuitive
+
+Paint -- prioritizes a fluid and intuitive user experience. Whether you're a professional artist or just starting out, you'll find the program easy to navigate, ensuring your focus remains on your artwork rather than grappling with complicated tools.
+
+## Getting Started
+
+### Prerequisites
+
+-   Ensure you have the latest version of Paint -- installed.
+-   An active internet connection for optimal AI features.
+
+### Installation
+
+1.  Clone the repository
+2.  Navigate to the project directory
+3.  Run Main.java
+
+### Usage
+
+1.  Launch the program and start a new project or open an existing one.
+2.  Explore the AI features by accessing the ChatGPT panel.
+3.  Use the color picker to choose your palette and take advantage of layers for more complex compositions.
+4.  Save your masterpiece and share it with the world!
+
+## Feedback and Support
+
+We value your feedback! If you encounter any issues or have suggestions for improvement, please open an issue on our [GitHub repository]
+
+## License
+
+Paint -- is licensed under the MIT License. Feel free to use, modify, and share the program according to the terms of the license.
+
+Happy painting! 🎨
