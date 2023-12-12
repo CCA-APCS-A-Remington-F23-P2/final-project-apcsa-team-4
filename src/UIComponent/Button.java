@@ -56,6 +56,8 @@ public class Button implements UIComponent{
         return height;
     }
 
+
+
     @Override
     public void draw(Graphics window) {
         if (!displayed) {
