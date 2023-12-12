@@ -242,11 +242,16 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
 
     //hide layer
-    public void hideLayer(Layer l) {
-        l.setVisible(false);
+    public ArrayList<Layer> getLayers() {
+        return layers;
     }
 
-    //move layer up
 
-    //move layer down
+    //function to switch two layers
+
+    public void switchLayers(int index1, int index2) {
+        Layer temp = layers.get(index1);
+        layers.set(index1, layers.get(index2));
+        layers.set(index2, temp);
+    }
 }

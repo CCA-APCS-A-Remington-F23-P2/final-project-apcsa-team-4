@@ -1,6 +1,5 @@
 package src.WindowComponent;
 
-
 import src.UIComponent.ColorPicker;
 import src.UIComponent.LayerSelector;
 import src.UIComponent.LayerUI;
@@ -17,7 +16,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
-
+import javax.swing.ImageIcon;
 
 public class UI extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
@@ -39,8 +38,8 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         this.x = x;
         this.y = y;
         this.p = p;
-        cp = new ColorPicker(x, y, cWidth-1, cWidth-1);
-        ls = new LayerSelector(x, y+cWidth-1, cWidth-1, cHeight-1 - cWidth+1);
+        cp = new ColorPicker(x, y, cWidth - 1, cWidth - 1);
+        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1, cHeight - 1 - cWidth + 1);
 
         ls.addLayer(p.getCurr());
 
@@ -52,8 +51,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         new Thread(this).start();
     }
 
-    public void update(Graphics window)
-    {
+    public void update(Graphics window) {
         paint(window);
     }
 
@@ -62,10 +60,11 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         Graphics2D g = bufferedImage.createGraphics();
         g.setStroke(new BasicStroke(3));
         g.clearRect(x, y, width, height);
-        
-        if (mouseDown&&mouseX>=cp.getX()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()&&mouseY<=cp.getY()+cp.getHeight()-cp.barHeight()) {
+
+        if (mouseDown && mouseX >= cp.getX() && mouseX <= cp.getX() + cp.getWidth() && mouseY >= cp.getY()
+                && mouseY <= cp.getY() + cp.getHeight() - cp.barHeight()) {
             p.recolor(cp.pick(mouseX, mouseY));
-        } 
+        }
 
         if (ls.getNewLayerButton().isClicked(mouseX, mouseY, mouseClick)) {
             ls.addLayer(p.addLayer());
@@ -80,12 +79,12 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             }
 
             if (layer.getDeleteButton().isClicked(mouseX, mouseY, mouseClick)) {
-                if (ls.getLayers().indexOf(layer)==ls.getSelectedLayer()) {
+                if (ls.getLayers().indexOf(layer) == ls.getSelectedLayer()) {
                     ls.setSelectedLayer(0);
                     p.setCurr(0);
                 }
 
-                if (ls.getLayers().size()==1) {
+                if (ls.getLayers().size() == 1) {
                     ls.addLayer(p.addLayer());
                 }
 
@@ -94,19 +93,65 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
                 ls.removeLayer(index);
                 p.removeLayer(index);
             }
+
+            if (layer.getHideButton().isClicked(mouseX, mouseY, mouseClick)) {
+                // System.out.println(p.getLayers().get(i).getVisible());
+                if (p.getLayers().get(i).getVisible()) {
+                    p.getLayers().get(i).setVisible(false);
+                    layer.getHideButton().setIcon(new ImageIcon("assets/show.png"));
+                } else {
+                    // p.removeLayer(i);
+                    p.getLayers().get(i).setVisible(true);
+                    layer.getHideButton().setIcon(new ImageIcon("assets/hide.png"));
+                }
+            }
+
+            if (layer.getMoveUpButton().isClicked(mouseX, mouseY, mouseClick)) {
+                int index = ls.getLayers().indexOf(layer);
+
+                if (index == 0) {
+                    return;
+                }
+
+                ls.switchLayers(index, index - 1);
+                p.switchLayers(index, index - 1);
+            }
+
+            if (layer.getMoveDownButton().isClicked(mouseX, mouseY, mouseClick)) {
+                int index = ls.getLayers().indexOf(layer);
+
+                if (index == ls.getLayers().size() - 1) {
+                    return;
+                }
+
+                ls.switchLayers(index, index + 1);
+                p.switchLayers(index, index + 1);
+
+            }
         }
 
-        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()*3&&mouseX<=cp.getX()+cp.getWidth()-cp.barHeight()*2&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
-            if (keys[0]) cp.changeRed(1);
-            if (keys[1]) cp.changeRed(-1);
+        if (mouseX >= cp.getX() + cp.getWidth() - cp.barHeight() * 3
+                && mouseX <= cp.getX() + cp.getWidth() - cp.barHeight() * 2
+                && mouseY >= cp.getY() + cp.getHeight() - cp.barHeight() && mouseY <= cp.getY() + cp.getHeight()) {
+            if (keys[0])
+                cp.changeRed(1);
+            if (keys[1])
+                cp.changeRed(-1);
         }
-        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()*2&&mouseX<=cp.getX()+cp.getWidth()-cp.barHeight()&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
-            if (keys[0]) cp.changeGreen(1);
-            if (keys[1]) cp.changeGreen(-1);
+        if (mouseX >= cp.getX() + cp.getWidth() - cp.barHeight() * 2
+                && mouseX <= cp.getX() + cp.getWidth() - cp.barHeight()
+                && mouseY >= cp.getY() + cp.getHeight() - cp.barHeight() && mouseY <= cp.getY() + cp.getHeight()) {
+            if (keys[0])
+                cp.changeGreen(1);
+            if (keys[1])
+                cp.changeGreen(-1);
         }
-        if (mouseX>=cp.getX()+cp.getWidth()-cp.barHeight()&&mouseX<=cp.getX()+cp.getWidth()&&mouseY>=cp.getY()+cp.getHeight()-cp.barHeight()&&mouseY<=cp.getY()+cp.getHeight()) {
-            if (keys[0]) cp.changeBlue(1);
-            if (keys[1]) cp.changeBlue(-1);
+        if (mouseX >= cp.getX() + cp.getWidth() - cp.barHeight() && mouseX <= cp.getX() + cp.getWidth()
+                && mouseY >= cp.getY() + cp.getHeight() - cp.barHeight() && mouseY <= cp.getY() + cp.getHeight()) {
+            if (keys[0])
+                cp.changeBlue(1);
+            if (keys[1])
+                cp.changeBlue(-1);
         }
 
         p.recolor(cp.getColor());
@@ -117,12 +162,11 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
 
         g.setColor(new Color(130, 130, 130));
         g.setStroke(new BasicStroke(1));
-        g.drawRect(x-2, y-1, width, height+2);
-        
+        g.drawRect(x - 2, y - 1, width, height + 2);
+
         Graphics2D g2dComponent = (Graphics2D) window;
-        g2dComponent.drawImage(bufferedImage, null, x, y); 
+        g2dComponent.drawImage(bufferedImage, null, x, y);
     }
-    
 
     public void keyPress(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -132,6 +176,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             keys[1] = true;
         }
     }
+
     public void keyRelease(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             keys[0] = false;
@@ -140,46 +185,56 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
             keys[1] = false;
         }
     }
+
     public void keyTyped(KeyEvent e) {
 
     }
-    public void run()
-    {
+
+    public void run() {
         try {
-            while(true) {
+            while (true) {
                 Thread.currentThread().sleep(16);
                 repaint();
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Screw you there was an error but we're too lazy to tell you what happened");
         }
-  }
+    }
+
     public void mouseClicked(MouseEvent e) {
         mouseClick = true;
     }
-    public void mouseExited(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
     public void mousePressed(MouseEvent e) {
         mouseDown = true;
     }
 
-    public Dimension getPreferredSize() {return new Dimension(width, height);}
+    public Dimension getPreferredSize() {
+        return new Dimension(width, height);
+    }
 
     public void mouseReleased(MouseEvent e) {
         mouseDown = false;
         mouseClick = false;
     }
+
     public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX()-x;
-        mouseY = e.getY()-y;
+        mouseX = e.getX() - x;
+        mouseY = e.getY() - y;
     }
+
     public void mouseDragged(MouseEvent e) {
         mouseDown = true;
 
-        mouseX = e.getX()-x;
-        mouseY = e.getY()-y;
+        mouseX = e.getX() - x;
+        mouseY = e.getY() - y;
     }
-
 
     public LayerSelector getLayerSelector() {
         return ls;
