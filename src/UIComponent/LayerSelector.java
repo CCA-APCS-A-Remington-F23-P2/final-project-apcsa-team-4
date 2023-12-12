@@ -80,6 +80,9 @@ public class LayerSelector implements UIComponent {
         for (int i = 0; i < layers.size(); i++) {
             LayerUI layer = layers.get(i);
 
+
+
+
             layer.draw(g);
 
             window.setColor(new Color(230, 230, 230));
@@ -92,7 +95,10 @@ public class LayerSelector implements UIComponent {
                 window.setColor(new Color(170, 170, 170));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
             }
+            window.drawString(Integer.toString(i), layer.getX()+10, layer.getY()+10);
+
         }
+
         Graphics2D g2dComponent = (Graphics2D) window;
         
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 
@@ -103,18 +109,21 @@ public class LayerSelector implements UIComponent {
     }
 
 
-    public void moveLayerUp(int indexOf) {
-        if (indexOf==0) return;
-        LayerUI temp = layers.get(indexOf);
-        layers.set(indexOf, layers.get(indexOf-1));
-        layers.set(indexOf-1, temp);
-    }
+    //switch 2 layers by their indexs method
 
-    public void moveLayerDown(int indexOf) {
-        if (indexOf==layers.size()-1) return;
-        LayerUI temp = layers.get(indexOf);
-        layers.set(indexOf, layers.get(indexOf+1));
-        layers.set(indexOf+1, temp);
+    public void switchLayers(int indexOf1, int indexOf2) {
+        int tempY = layers.get(indexOf1).getY();
+        int tempY2 = layers.get(indexOf2).getY();
+
+        LayerUI temp = layers.get(indexOf1);
+        //change the x and y of each layer to the other layer
+
+
+
+        layers.set(indexOf1, layers.get(indexOf2));
+        layers.set(indexOf2, temp);
+        layers.get(indexOf1).setY(tempY);
+        layers.get(indexOf2).setY(tempY2);
     }
 
 

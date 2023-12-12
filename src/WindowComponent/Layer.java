@@ -52,6 +52,10 @@ public class Layer {
         this.visible = visible;
     }
 
+    public BufferedImage getImageEvenIfNotVis() {
+        return buf;
+    }
+
     public void draw(Brush b, int x, int y, boolean dl) {
        // System.out.println(visible);
         b.draw(g, x, y, dl);
