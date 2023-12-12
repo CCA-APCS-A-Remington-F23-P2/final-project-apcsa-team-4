@@ -259,11 +259,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     public BufferedImage getBufferedImage() {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
-        g.setColor(new Color(200, 200, 200));
-        g.fillRect(0, 0, width, height);
-        g.setColor(new Color(170, 170, 170));
-        g.drawRect(0, 0, width, height);
-
+        
         for (Layer l:layers) {
             g.drawImage(l.getImage(),0,0, null);
         }
