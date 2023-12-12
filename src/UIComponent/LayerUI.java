@@ -22,7 +22,7 @@ public class LayerUI extends Button implements UIComponent{
         super(x,y,width,height);
         this.layer = layer;
         this.displayed = true;
-        int buttonWidth = width/18;
+        int buttonWidth = height/5;
         moveUpButton = new Button(x+width/2+10, y+5, buttonWidth, buttonWidth, new ImageIcon("assets/up.png"));
         hideButton = new Button(x+width/2+10, moveUpButton.getY()+buttonWidth + 3, buttonWidth, buttonWidth, new ImageIcon("assets/hide.png"));
         moveDownButton = new Button(x+width/2+10, hideButton.getY()+buttonWidth + 3, buttonWidth, buttonWidth, new ImageIcon("assets/down.png"));
