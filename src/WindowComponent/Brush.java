@@ -39,6 +39,7 @@ public class Brush {
         this.s = s;
         this.width = (int)s.getBounds().getWidth();
         this.height = (int)s.getBounds().getHeight();
+        size = (this.width+this.height)/2;
         for (int x=0;x<s.getBounds().getWidth();x++) {
             for (int y=0;y<s.getBounds().getHeight();y++) {
                 if (s.contains(x,y)) {img.setRGB(x, y, color.getRGB());wImg.setRGB(x, y, white.getRGB());}
@@ -71,8 +72,19 @@ public class Brush {
             System.out.println("Couldn't Load Brush Texture");
         }
     }
-    public void resize() {
-
+    public void resize(int inc) {
+        scaleFactor = (size+inc)/size;
+        size += inc;
+        Image scaledImg = ((Image)img).getScaledInstance((int)(width*scaleFactor), (int)(height*scaleFactor), Image.SCALE_DEFAULT);
+        Image scaledWImg = ((Image)wImg).getScaledInstance((int)(width*scaleFactor), (int)(height*scaleFactor), Image.SCALE_DEFAULT);
+        img = new BufferedImage((int)(width*scaleFactor), (int)(height*scaleFactor), BufferedImage.TYPE_INT_ARGB);
+        wImg = new BufferedImage((int)(width*scaleFactor), (int)(height*scaleFactor), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D bGr = img.createGraphics();
+        Graphics2D bwGr = wImg.createGraphics();
+        bGr.drawImage(scaledImg, 0, 0, null);
+        bwGr.drawImage(scaledWImg, 0, 0, null);
+        bGr.dispose();
+        bwGr.dispose();
     }
     private void setColor(float[] scales) {
         Graphics2D bGr = img.createGraphics();
@@ -87,17 +99,13 @@ public class Brush {
     }
     public void draw(Graphics window, int x, int y, boolean doLine) {
         window.drawImage(img, x, y, null);
-        if (doLine) {
-            TexturePaint paint = new TexturePaint(img, new Rectangle(0, 0, width, height));
-            ((Graphics2D)window).setPaint(paint);
-            ((Graphics2D)window).setStroke(new BasicStroke(this.width));
-            ((Graphics2D)window).drawLine(lastX+width/2, lastY+height/2, x+width/2, y+height/2);
-        }
-        lastX = x;
-        lastY = y;
     }
 
     public Color getColor() {
         return color;
+    }
+
+    public double getSize() {
+        return size;
     }
 }
