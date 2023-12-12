@@ -95,8 +95,6 @@ public class LayerSelector implements UIComponent {
                 window.setColor(new Color(170, 170, 170));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
             }
-            window.drawString(Integer.toString(i), layer.getX()+10, layer.getY()+10);
-
         }
 
         Graphics2D g2dComponent = (Graphics2D) window;
