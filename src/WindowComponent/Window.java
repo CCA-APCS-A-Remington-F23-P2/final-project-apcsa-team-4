@@ -1,20 +1,28 @@
 package src.WindowComponent;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
+
+import src.UIComponent.imageExport;
 import src.UIComponent.keyLis;
 
 public class Window extends JFrame {
@@ -50,6 +58,18 @@ public class Window extends JFrame {
         }
         setSize(WIDTH,HEIGHT);
         try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
+
+        JMenuBar menubar = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        JMenuItem size = new JMenuItem(new AbstractAction("Save") {
+            public void actionPerformed(ActionEvent ae) {
+                imageExport.export("help", p.getBufferedImage());
+            }
+        });
+        
+        menu.add(size);
+        menubar.add(menu);
+        setJMenuBar(menubar);
 
 
         p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
