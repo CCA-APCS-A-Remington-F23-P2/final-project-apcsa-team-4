@@ -254,4 +254,9 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         layers.set(index1, layers.get(index2));
         layers.set(index2, temp);
     }
+
+    public void importImage(BufferedImage img) {
+        curr = new Layer(img.getWidth(), img.getHeight(), x, y);
+        layers.add(curr);
+    }
 }

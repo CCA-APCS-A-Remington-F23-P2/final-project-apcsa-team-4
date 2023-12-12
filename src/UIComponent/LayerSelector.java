@@ -5,13 +5,10 @@ import src.WindowComponent.Layer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-import javax.imageio.ImageIO;
 
 
 public class LayerSelector implements UIComponent {
@@ -22,12 +19,17 @@ public class LayerSelector implements UIComponent {
     private final int height;
     private int selectedLayer; 
     private final Button newLayerButton;
+    private final Button moveDownButton;
+    private final Button moveUpButton;
 
     public LayerSelector(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         layers = new ArrayList<LayerUI>();
-        newLayerButton = new Button(x, y, width/10, width/10, new ImageIcon("assets/icons/plus.png"));
+        newLayerButton = new Button(x, y, height/15, height/15, new ImageIcon("assets/icons/plus.png"));
+        //make the moveDown and move Up buttons inline wiht the newLayerButton
+        moveDownButton = new Button(x+newLayerButton.getWidth()+width/2, y, height/15, height/15, new ImageIcon("assets/down.png"));
+        moveUpButton = new Button(moveDownButton.getX()+moveDownButton.getWidth()+10, y, height/15, height/15, new ImageIcon("assets/up.png"));
         this.width = width;
         this.height = height;
     }
@@ -76,9 +78,15 @@ public class LayerSelector implements UIComponent {
         window.setColor(new Color(170, 170, 170));
         window.fillRect(x, y, width, height);
         newLayerButton.draw(window);
+        moveDownButton.draw(window);
+        moveUpButton.draw(window);
 
         for (int i = 0; i < layers.size(); i++) {
             LayerUI layer = layers.get(i);
+
+            if (layer.getY() > height-layer.getHeight()) {
+                break;
+            }
 
 
 
