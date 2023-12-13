@@ -1,4 +1,5 @@
 package src.WindowComponent;
+
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -14,7 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -48,29 +48,51 @@ public class Window extends JFrame {
     private paint p;
     private UI u;
 
-
     public Window() {
         super("Paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
 
-        
-
         File img = new File("assets/cursor.png");
         try {
-             in = ImageIO.read(img);
+            in = ImageIO.read(img);
         } catch (IOException ex) {
             System.err.print("LMAO\n");
             ex.printStackTrace();
             System.exit(1);
         }
-        setSize(WIDTH,HEIGHT);
-        try {setIconImage(ImageIO.read(new File("assets/logo.png"))); } catch (Exception e) {};
+        setSize(WIDTH, HEIGHT);
+        try {
+            setIconImage(ImageIO.read(new File("assets/logo.png")));
+        } catch (Exception e) {
+        }
+        ;
 
         JMenuBar menubar = new JMenuBar();
         JMenu menu = new JMenu("File");
         JMenuItem save = new JMenuItem(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent ae) {
                 imageExport.export(null, p.getBufferedImage());
+            }
+        });
+        JMenuItem open = new JMenuItem(new AbstractAction("Open") {
+            public void actionPerformed(ActionEvent ae) {
+
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "JPG & GIF Images", "jpg", "png");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("You chose to open this file: " +
+                            chooser.getSelectedFile().getName());
+                }
+
+
+                try {
+                    u.getLayerSelector().addLayer(p.importImage(ImageIO.read(chooser.getSelectedFile())));
+                } catch (IOException e) {
+                    System.out.println("what the crap did u do");
+                }
             }
         });
 
@@ -129,39 +151,36 @@ public class Window extends JFrame {
         p.setUI(u);
         u.setCP((JColorChooser)colorPicker);
 
-        ((Component)p).setFocusable(false);
-        ((Component)u).setFocusable(false);
+        ((Component) p).setFocusable(false);
+        ((Component) u).setFocusable(false);
 
         getContentPane().add(p, BorderLayout.CENTER);
         getContentPane().add(u, BorderLayout.WEST);
-        
+
         Image brush = new ImageIcon("assets/pencil.png").getImage();
 
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent evt) {
                 Component c = (Component) evt.getSource();
-                p.setXY((getWidth()-UI_WIDTH)/2 - PROJECT_WIDTH/2, getHeight()/2-PROJECT_HEIGHT/2-25);
+                p.setXY((getWidth() - UI_WIDTH) / 2 - PROJECT_WIDTH / 2, getHeight() / 2 - PROJECT_HEIGHT / 2 - 25);
             }
         });
 
         p.setCursor(getToolkit().createCustomCursor(
-            brush,
-            new Point(0,31),
-            "brush"
-        ));
+                brush,
+                new Point(0, 31),
+                "brush"));
 
         u.setCursor(getToolkit().createCustomCursor(
-            new ImageIcon("assets/cursor.png").getImage(),
-            new Point(0,0),
-            "cursor"
-        ));
+                new ImageIcon("assets/cursor.png").getImage(),
+                new Point(0, 0),
+                "cursor"));
 
-        p.setBackground(new java.awt.Color(200,200,200));
-        u.setBackground(new java.awt.Color(210,210,210));
+        p.setBackground(new java.awt.Color(200, 200, 200));
+        u.setBackground(new java.awt.Color(210, 210, 210));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
-
 
         kl = new keyLis(this);
         this.addKeyListener(kl);
@@ -175,6 +194,7 @@ public class Window extends JFrame {
         u.keyPress(e);
 
     }
+
     public void keyHandleRelease(KeyEvent e) {
         p.keyRelease(e);
         u.keyRelease(e);
