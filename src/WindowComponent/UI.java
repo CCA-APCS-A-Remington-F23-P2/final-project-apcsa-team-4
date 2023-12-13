@@ -39,7 +39,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         this.y = y;
         this.p = p;
         cp = new ColorPicker(x, y, cWidth - 1, cWidth - 1);
-        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1, cHeight - 200 - cWidth + 1);
+        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1,  500/* cHeight - 200 - cWidth + 1 */);
 
         ls.addLayer(p.getCurr());
 

@@ -104,10 +104,11 @@ public class LayerSelector implements UIComponent {
                 window.setColor(new Color(170, 170, 170));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
             }
+            window.drawString(Integer.toString(i), layer.getX()+layer.getWidth()/2-3, layer.getY()+layer.getHeight()/2+3);
         }
 
+
         Graphics2D g2dComponent = (Graphics2D) window;
-        
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
 
@@ -119,6 +120,12 @@ public class LayerSelector implements UIComponent {
     //switch 2 layers by their indexs method
 
     public void switchLayers(int indexOf1, int indexOf2) {
+        if (selectedLayer == indexOf1) {
+            selectedLayer = indexOf2;
+        } else if (selectedLayer == indexOf2) {
+            selectedLayer = indexOf1;
+        }
+
         int tempY = layers.get(indexOf1).getY();
         int tempY2 = layers.get(indexOf2).getY();
 

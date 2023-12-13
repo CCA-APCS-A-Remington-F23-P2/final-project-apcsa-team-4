@@ -12,6 +12,7 @@ public class imageExport {
             if (name == null) {
                 name = JOptionPane.showInputDialog("File name please: ");
             }
+
             File outputfile = new File(name+".png");
             ImageIO.write(out, "png", outputfile);
         } catch (IOException e) {
