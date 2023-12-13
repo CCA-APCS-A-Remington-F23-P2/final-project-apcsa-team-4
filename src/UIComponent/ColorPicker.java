@@ -96,4 +96,8 @@ public class ColorPicker implements UIComponent {
         if (currColor.getBlue()+i<256&&currColor.getBlue()+i>=0)
         currColor = new Color(currColor.getRed(), currColor.getGreen(), currColor.getBlue()+i);
     }
+
+    public void setColor(Color c) {
+        currColor = c;
+    }
 }

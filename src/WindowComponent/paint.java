@@ -15,6 +15,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JColorChooser;
+
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
@@ -22,6 +25,7 @@ import java.awt.event.MouseEvent;
 public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
+    
     private UI ui;
     private ArrayList<Layer> layers;
     private Layer curr;
@@ -64,6 +68,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
         width = cWidth;
         height = cHeight;
+        
 
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
@@ -273,5 +278,9 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     public void importImage(BufferedImage img) {
         curr = new Layer(img.getWidth(), img.getHeight(), x, y);
         layers.add(curr);
+    }   
+
+    public void resizeBrush(int size) {
+        b.resize(size);
     }
 }

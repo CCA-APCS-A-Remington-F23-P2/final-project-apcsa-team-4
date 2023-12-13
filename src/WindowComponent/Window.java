@@ -5,14 +5,18 @@ import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
@@ -83,21 +87,47 @@ public class Window extends JFrame {
             }
         });
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(fill);
-        group.add(brushM);
+        JMenuItem brushUp = new JMenuItem(new AbstractAction("Size Up") {
+            public void actionPerformed(ActionEvent ae) {
+                p.resizeBrush(1);
+            }
+        });
+
+        JMenuItem brushDown = new JMenuItem(new AbstractAction("Size Down") {
+            public void actionPerformed(ActionEvent ae) {
+                p.resizeBrush(-1);
+            }
+        });
+
+        ButtonGroup toolGroup = new ButtonGroup();
+        toolGroup.add(fill);
+        toolGroup.add(brushM);
+
+        ButtonGroup sizeGroup = new ButtonGroup();
+        sizeGroup.add(brushUp);
+        sizeGroup.add(brushDown);
+
+        JComponent separator = new JSeparator();
+
+        JComponent colorPicker = new JColorChooser();
         
         menu.add(save);
         tool.add(fill);
         tool.add(brushM);
+        tool.add(separator);
+        tool.add(brushUp);
+        tool.add(brushDown);
+        tool.add(colorPicker);
         menubar.add(menu);
         menubar.add(tool);
+        brushM.setSelected(true);
         setJMenuBar(menubar);
-
+        ((JColorChooser)colorPicker).setColor(Color.BLACK);
 
         p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
+        u.setCP((JColorChooser)colorPicker);
 
         ((Component)p).setFocusable(false);
         ((Component)u).setFocusable(false);
