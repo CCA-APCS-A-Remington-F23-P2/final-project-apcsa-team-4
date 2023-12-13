@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -15,6 +16,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -132,7 +135,8 @@ public class Window extends JFrame {
         JComponent separator = new JSeparator();
 
         JComponent colorPicker = new JColorChooser();
-        
+
+        menu.add(open);
         menu.add(save);
         tool.add(fill);
         tool.add(brushM);
