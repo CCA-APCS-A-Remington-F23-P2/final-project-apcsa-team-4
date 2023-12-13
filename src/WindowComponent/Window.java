@@ -2,12 +2,15 @@ package src.WindowComponent;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -66,9 +69,29 @@ public class Window extends JFrame {
                 imageExport.export(null, p.getBufferedImage());
             }
         });
+
+        JMenu tool = new JMenu("Tool");
+        JMenuItem fill = new JRadioButtonMenuItem(new AbstractAction("Fill") {
+            public void actionPerformed(ActionEvent ae) {
+                p.setFill(true);
+            }
+        });
+
+        JMenuItem brushM = new JRadioButtonMenuItem(new AbstractAction("Brush") {
+            public void actionPerformed(ActionEvent ae) {
+                p.setFill(false);
+            }
+        });
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(fill);
+        group.add(brushM);
         
         menu.add(save);
+        tool.add(fill);
+        tool.add(brushM);
         menubar.add(menu);
+        menubar.add(tool);
         setJMenuBar(menubar);
 
 

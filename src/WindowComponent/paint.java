@@ -75,6 +75,10 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         this.ui = ui;
     }
 
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+
     public void update(Graphics window)
     {
         systime = System.currentTimeMillis();
@@ -117,7 +121,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     {
         try {
             while(true) {
-                Thread.currentThread().sleep(2);
+                Thread.currentThread().sleep(5);
                 repaint();
             }
         }catch(Exception e) {
