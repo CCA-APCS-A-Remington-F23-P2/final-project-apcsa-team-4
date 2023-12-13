@@ -1,6 +1,6 @@
 package src.WindowComponent;
 
-
+import src.UIComponent.lineCreator;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -44,6 +44,8 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     private ArrayList<int[]> mPos;
     private ArrayList<ArrayList<Layer>> undo;
     private static final double THRESH = 0.2;
+    private int lx;
+    private int ly;
 
     public paint(int cWidth, int cHeight, int x, int y) {
 
@@ -117,7 +119,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     {
         try {
             while(true) {
-                Thread.currentThread().sleep(10);
+                Thread.currentThread().sleep(5);
                 repaint();
             }
         }catch(Exception e) {
@@ -136,7 +138,6 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
   public void mousePressed(MouseEvent e) {
       mouseDown = true;
-      System.out.println("lmao");
       clickTime = systime;
       if (!fill) curr.draw(b, mouseX, mouseY, inDraw || shiftDraw);
       undo.add(layers);
@@ -145,6 +146,8 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
   public void mouseDown(MouseEvent e) {
     mouseDown = true;
+    if (!shiftDraw) {lx = e.getX()-x;
+    ly = e.getY()-y;}
   }
 
   private double distance(double xP1, double yP1, double xP2, double yP2) {
@@ -163,7 +166,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
     public void mouseReleased(MouseEvent e) {
         mouseDown = false;
-        System.out.println("what");
+        inDraw = false;
     }
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX()-x;
@@ -173,14 +176,24 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         mouseDown = true;
         mouseX = e.getX()-x;
         mouseY = e.getY()-y;
+        double dist;
         if (mPos.size() == 0) {
             mPos.add(new int[]{mouseX, mouseY});
         } else {
             int[] p1 = mPos.get(mPos.size()-1);
-            if (distance(p1[0], p1[1], mouseX, mouseY)  > b.getSize()*THRESH) mPos.add(new int[]{mouseX, mouseY});
+            dist = distance(p1[0], p1[1], mouseX, mouseY);
+            if (dist > b.getSize()*THRESH) mPos.add(new int[]{mouseX, mouseY});
+        }
+        dist = distance(lx, ly, mouseX, mouseY);
+        if (dist > b.getSize()*1.5 && inDraw) {
+            lineCreator l = new lineCreator(lx, ly, mouseX, mouseY, mPos, (int)b.getSize());
+        }
+        lx = mouseX;
+        ly = mouseY;
+        if (systime > clickTime+LINEDELAY) {
+            inDraw = true;
         }
     }
-
     public void recolor(Color c) {
         b.recolor(c);
     }
