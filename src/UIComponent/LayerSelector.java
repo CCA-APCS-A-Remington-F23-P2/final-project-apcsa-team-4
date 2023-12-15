@@ -28,8 +28,8 @@ public class LayerSelector implements UIComponent {
         layers = new ArrayList<LayerUI>();
         newLayerButton = new Button(x, y, height/15, height/15, new ImageIcon("assets/icons/plus.png"));
         //make the moveDown and move Up buttons inline wiht the newLayerButton
-        moveDownButton = new Button(x+newLayerButton.getWidth()+width/2, y, height/15, height/15, new ImageIcon("assets/down.png"));
-        moveUpButton = new Button(moveDownButton.getX()+moveDownButton.getWidth()+10, y, height/15, height/15, new ImageIcon("assets/up.png"));
+        moveDownButton = new Button(x+newLayerButton.getWidth()+width/3, y, height/15, height/15, new ImageIcon("assets/down.png"));
+        moveUpButton = new Button(moveDownButton.getX()+moveDownButton.getWidth()+1, y, height/15, height/15, new ImageIcon("assets/up.png"));
         this.width = width;
         this.height = height;
     }
