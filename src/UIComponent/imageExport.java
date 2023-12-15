@@ -6,7 +6,7 @@ import java.lang.Exception.*;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 
-public class imageExport {
+public class ImageExport {
     public static void export(String name, BufferedImage out) {
         try {
             if (name == null) {

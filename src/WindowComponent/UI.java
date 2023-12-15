@@ -24,7 +24,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     private ColorPicker cp;
     private JColorChooser cp2;
     private LayerSelector ls;
-    private paint p;
+    private Paint p;
     private int width;
     private int height;
     private int x;
@@ -36,7 +36,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
     private boolean[] keysPrev = new boolean[2];
     public boolean mouseClick = false;
 
-    public UI(int cWidth, int cHeight, int x, int y, paint p) {
+    public UI(int cWidth, int cHeight, int x, int y, Paint p) {
         this.x = x;
         this.y = y;
         this.p = p;

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -15,6 +16,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -29,8 +32,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
 
-import src.UIComponent.imageExport;
-import src.UIComponent.keyLis;
+import src.UIComponent.ImageExport;
+import src.UIComponent.KeyLis;
 
 public class Window extends JFrame {
 
@@ -44,8 +47,8 @@ public class Window extends JFrame {
 
     public static final int UI_HEIGHT = HEIGHT;
 
-    private keyLis kl;
-    private paint p;
+    private KeyLis kl;
+    private Paint p;
     private UI u;
 
     public Window() {
@@ -71,7 +74,7 @@ public class Window extends JFrame {
         JMenu menu = new JMenu("File");
         JMenuItem save = new JMenuItem(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent ae) {
-                imageExport.export(null, p.getBufferedImage());
+                ImageExport.export(null, p.getBufferedImage());
             }
         });
         JMenuItem open = new JMenuItem(new AbstractAction("Open") {
@@ -143,10 +146,11 @@ public class Window extends JFrame {
         menubar.add(menu);
         menubar.add(tool);
         brushM.setSelected(true);
+        menubar.setBackground(new Color(210, 210, 210));
         setJMenuBar(menubar);
         ((JColorChooser)colorPicker).setColor(Color.BLACK);
 
-        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        p = new Paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
         u.setCP((JColorChooser)colorPicker);
@@ -182,7 +186,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
 
-        kl = new keyLis(this);
+        kl = new KeyLis(this);
         this.addKeyListener(kl);
 
         // getContentPane().setLayout(new FlowLayout());

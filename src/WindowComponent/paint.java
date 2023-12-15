@@ -22,7 +22,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
 
-public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
+public class Paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
     
@@ -49,7 +49,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     private ArrayList<ArrayList<Layer>> undo;
     private static final double THRESH = 0.2;
 
-    public paint(int cWidth, int cHeight, int x, int y) {
+    public Paint(int cWidth, int cHeight, int x, int y) {
 
         setVisible(true);
         setFocusable(true);
