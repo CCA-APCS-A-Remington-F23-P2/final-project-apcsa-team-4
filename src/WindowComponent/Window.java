@@ -135,7 +135,8 @@ public class Window extends JFrame {
         JComponent separator = new JSeparator();
 
         JComponent colorPicker = new JColorChooser();
-        
+
+        menu.add(open);
         menu.add(save);
         tool.add(fill);
         tool.add(brushM);
