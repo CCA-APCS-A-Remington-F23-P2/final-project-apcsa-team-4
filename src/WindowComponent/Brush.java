@@ -73,8 +73,14 @@ public class Brush {
         }
     }
     public void resize(int inc) {
+        if (size+inc>1000) return;
+        if (size+inc<1) return;
+
         scaleFactor = (size+inc)/size;
         size += inc;
+        width = (int)(width*scaleFactor);
+        height = (int)(height*scaleFactor);
+        System.out.println(size);
         Image scaledImg = ((Image)img).getScaledInstance((int)(width*scaleFactor), (int)(height*scaleFactor), Image.SCALE_DEFAULT);
         Image scaledWImg = ((Image)wImg).getScaledInstance((int)(width*scaleFactor), (int)(height*scaleFactor), Image.SCALE_DEFAULT);
         img = new BufferedImage((int)(width*scaleFactor), (int)(height*scaleFactor), BufferedImage.TYPE_INT_ARGB);

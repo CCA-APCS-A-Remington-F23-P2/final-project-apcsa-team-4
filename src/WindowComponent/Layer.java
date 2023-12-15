@@ -3,6 +3,7 @@ package src.WindowComponent;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
@@ -30,6 +31,15 @@ public class Layer {
         this.windowY = windowY;
         visible = true;
     }
+
+    public Layer(int width, int height, int windowX, int windowY, BufferedImage img) {
+        buf = toBufferedImage(img.getScaledInstance(width, height, 0));
+        g = buf.createGraphics();
+        this.windowX = windowX;
+        this.windowY = windowY;
+        visible = true;
+    }
+
     public BufferedImage getImage() {
         if (!visible) {
             return new BufferedImage(buf.getWidth(), buf.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -37,9 +47,11 @@ public class Layer {
 
         return buf;
     }
+
     public int getX() {
         return x;
     }
+
     public int getY() {
         return y;
     }
@@ -57,7 +69,7 @@ public class Layer {
     }
 
     public void draw(Brush b, int x, int y, boolean dl) {
-       // System.out.println(visible);
+        // System.out.println(visible);
         b.draw(g, x, y, dl);
     }
 
@@ -66,36 +78,53 @@ public class Layer {
         if (x < 0 || x >= buf.getWidth() || y < 0 || y >= buf.getHeight()) {
             return;
         }
-        
+
         int targetColor = buf.getRGB(x, y);
         int fillColor = b.getColor().getRGB();
-        
+
         if (targetColor == fillColor) {
             return;
         }
-        
+
         ArrayList<int[]> queue = new ArrayList<>();
-        queue.add(new int[]{x, y});
-        
+        queue.add(new int[] { x, y });
+
         while (!queue.isEmpty()) {
             int[] pixel = queue.remove(queue.size() - 1);
             int px = pixel[0];
             int py = pixel[1];
-            
+
             if (px < 0 || px >= buf.getWidth() || py < 0 || py >= buf.getHeight()) {
                 continue;
             }
-            
+
             if (buf.getRGB(px, py) != targetColor) {
                 continue;
             }
-            
+
             buf.setRGB(px, py, fillColor);
-            
-            queue.add(new int[]{px - 1, py});
-            queue.add(new int[]{px + 1, py});
-            queue.add(new int[]{px, py - 1});
-            queue.add(new int[]{px, py + 1});
+
+            queue.add(new int[] { px - 1, py });
+            queue.add(new int[] { px + 1, py });
+            queue.add(new int[] { px, py - 1 });
+            queue.add(new int[] { px, py + 1 });
         }
+    }
+
+    public static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+
+        // Create a buffered image with transparency
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        // Draw the image on to the buffered image
+        Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+
+        // Return the buffered image
+        return bimage;
     }
 }

@@ -15,6 +15,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JColorChooser;
+
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
@@ -22,6 +25,7 @@ import java.awt.event.MouseEvent;
 public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
+    
     private UI ui;
     private ArrayList<Layer> layers;
     private Layer curr;
@@ -66,6 +70,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
         width = cWidth;
         height = cHeight;
+        
 
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
@@ -75,6 +80,10 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
     public void setUI(UI ui) {
         this.ui = ui;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
     }
 
     public void update(Graphics window)
@@ -243,10 +252,10 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
            erase = false;
        }
        if (e.getKeyCode() == KeyEvent.VK_OPEN_BRACKET) {
-            b.resize(-10);
+            b.resize(-3);
        }
        if (e.getKeyCode() == KeyEvent.VK_CLOSE_BRACKET) {
-            b.resize(10);
+            b.resize(3);
        }
     }
 
@@ -266,5 +275,26 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         Layer temp = layers.get(index1);
         layers.set(index1, layers.get(index2));
         layers.set(index2, temp);
+    }
+
+
+    public BufferedImage getBufferedImage() {
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bufferedImage.createGraphics();
+        
+        for (Layer l:layers) {
+            g.drawImage(l.getImage(),0,0, null);
+        }
+        return bufferedImage;
+    }
+
+    public void resizeBrush(int size) {
+        b.resize(size);
+    }
+
+    public Layer importImage(BufferedImage img) {
+        Layer newLayer = new Layer(width, height, x, y, img);
+        layers.add(newLayer);
+        return newLayer;
     }
 }

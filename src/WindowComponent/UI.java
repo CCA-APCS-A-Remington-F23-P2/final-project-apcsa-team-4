@@ -17,10 +17,12 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
 
 public class UI extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private ColorPicker cp;
+    private JColorChooser cp2;
     private LayerSelector ls;
     private paint p;
     private int width;
@@ -39,9 +41,10 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         this.y = y;
         this.p = p;
         cp = new ColorPicker(x, y, cWidth - 1, cWidth - 1);
-        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1, cHeight - 1 - cWidth + 1);
+        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1,  500/* cHeight - 200 - cWidth + 1 */);
 
         ls.addLayer(p.getCurr());
+        cp2 = null;
 
         width = cWidth;
         height = cHeight;
@@ -55,6 +58,10 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         paint(window);
     }
 
+    public void setCP(JColorChooser cp2) {
+        this.cp2 = cp2;
+    }
+
     public void paint(Graphics window) {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
@@ -63,8 +70,14 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
 
         if (mouseDown && mouseX >= cp.getX() && mouseX <= cp.getX() + cp.getWidth() && mouseY >= cp.getY()
                 && mouseY <= cp.getY() + cp.getHeight() - cp.barHeight()) {
-            p.recolor(cp.pick(mouseX, mouseY));
+            cp2.setColor(cp.pick(mouseX, mouseY));
         }
+
+        if (cp2.getColor() != cp.getColor()) {
+            cp.setColor(cp2.getColor());
+        }
+
+        p.recolor(cp2.getColor());
 
         if (ls.getNewLayerButton().isClicked(mouseX, mouseY, mouseClick)) {
             ls.addLayer(p.addLayer());

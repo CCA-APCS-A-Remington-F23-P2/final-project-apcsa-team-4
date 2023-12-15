@@ -5,13 +5,10 @@ import src.WindowComponent.Layer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-import javax.imageio.ImageIO;
 
 
 public class LayerSelector implements UIComponent {
@@ -22,12 +19,17 @@ public class LayerSelector implements UIComponent {
     private final int height;
     private int selectedLayer; 
     private final Button newLayerButton;
+    private final Button moveDownButton;
+    private final Button moveUpButton;
 
     public LayerSelector(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         layers = new ArrayList<LayerUI>();
-        newLayerButton = new Button(x, y, width/10, width/10, new ImageIcon("assets/icons/plus.png"));
+        newLayerButton = new Button(x, y, height/15, height/15, new ImageIcon("assets/icons/plus.png"));
+        //make the moveDown and move Up buttons inline wiht the newLayerButton
+        moveDownButton = new Button(x+newLayerButton.getWidth()+width/2, y, height/15, height/15, new ImageIcon("assets/down.png"));
+        moveUpButton = new Button(moveDownButton.getX()+moveDownButton.getWidth()+10, y, height/15, height/15, new ImageIcon("assets/up.png"));
         this.width = width;
         this.height = height;
     }
@@ -75,10 +77,17 @@ public class LayerSelector implements UIComponent {
         
         window.setColor(new Color(170, 170, 170));
         window.fillRect(x, y, width, height);
+        
         newLayerButton.draw(window);
+        moveDownButton.draw(window);
+        moveUpButton.draw(window);
 
         for (int i = 0; i < layers.size(); i++) {
             LayerUI layer = layers.get(i);
+
+            if (layer.getY() > y + height-layer.getHeight()) {
+                break;
+            }
 
 
 
@@ -95,12 +104,11 @@ public class LayerSelector implements UIComponent {
                 window.setColor(new Color(170, 170, 170));
                 window.drawRect(layer.getX()-2, layer.getY()-1, layer.getWidth()+2, layer.getHeight()+2);
             }
-            window.drawString(Integer.toString(i), layer.getX()+10, layer.getY()+10);
-
+            window.drawString(Integer.toString(i), layer.getX()+layer.getWidth()/2-3, layer.getY()+layer.getHeight()/2+3);
         }
 
+
         Graphics2D g2dComponent = (Graphics2D) window;
-        
         g2dComponent.drawImage(bufferedImage, null, 0, 0); 
     }
 
@@ -112,6 +120,12 @@ public class LayerSelector implements UIComponent {
     //switch 2 layers by their indexs method
 
     public void switchLayers(int indexOf1, int indexOf2) {
+        if (selectedLayer == indexOf1) {
+            selectedLayer = indexOf2;
+        } else if (selectedLayer == indexOf2) {
+            selectedLayer = indexOf1;
+        }
+
         int tempY = layers.get(indexOf1).getY();
         int tempY2 = layers.get(indexOf2).getY();
 
