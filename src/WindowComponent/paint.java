@@ -211,6 +211,12 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
         layers.add(new Layer(width, height, x, y));
         return layers.get(layers.size()-1);
     }
+
+    public Layer addLayer(Layer l) {
+        layers.add(l);
+        return layers.get(layers.size()-1);
+    }
+
     public void keyPress(KeyEvent e) {
        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
            shiftDraw = true;
