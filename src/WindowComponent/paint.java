@@ -1,6 +1,8 @@
 package src.WindowComponent;
 
 import src.UIComponent.lineCreator;
+import src.UIComponent.LayerSelector;
+import src.UIComponent.imageExport;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -50,6 +52,7 @@ public class Paint extends Canvas implements MouseListener, Runnable, MouseMotio
     private static final double THRESH = 0.2;
     private int lx;
     private int ly;
+    private LayerSelector lys;
 
     public Paint(int cWidth, int cHeight, int x, int y) {
 
@@ -224,6 +227,11 @@ public class Paint extends Canvas implements MouseListener, Runnable, MouseMotio
         layers.add(new Layer(width, height, x, y));
         return layers.get(layers.size()-1);
     }
+
+    public void addLayer(Layer l) {
+        layers.add(l);
+        lys.addLayer(l);
+    }
     public void keyPress(KeyEvent e) {
        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
            shiftDraw = true;
@@ -296,5 +304,8 @@ public class Paint extends Canvas implements MouseListener, Runnable, MouseMotio
         Layer newLayer = new Layer(width, height, x, y, img);
         layers.add(newLayer);
         return newLayer;
+    }
+    public void setLSec(LayerSelector l) {
+        this.lys = l;
     }
 }

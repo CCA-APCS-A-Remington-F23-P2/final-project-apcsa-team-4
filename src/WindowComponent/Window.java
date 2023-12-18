@@ -31,9 +31,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
-
-import src.UIComponent.ImageExport;
 import src.UIComponent.KeyLis;
+import src.UIComponent.imageExport;
 
 public class Window extends JFrame {
 
@@ -74,7 +73,7 @@ public class Window extends JFrame {
         JMenu menu = new JMenu("File");
         JMenuItem save = new JMenuItem(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent ae) {
-                ImageExport.export(null, p.getBufferedImage());
+                imageExport.export(null, p.getBufferedImage());
             }
         });
         JMenuItem open = new JMenuItem(new AbstractAction("Open") {
