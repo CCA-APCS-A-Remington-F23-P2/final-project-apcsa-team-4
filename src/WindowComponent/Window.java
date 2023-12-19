@@ -73,7 +73,11 @@ public class Window extends JFrame {
         JMenu menu = new JMenu("File");
         JMenuItem save = new JMenuItem(new AbstractAction("Save") {
             public void actionPerformed(ActionEvent ae) {
-                imageExport.export(null, p.getBufferedImage());
+                try {
+                    imageExport.export(null, p.getBufferedImage());
+                } catch(Exception e) {
+                    System.out.println("balls but in hd");
+                }
             }
         });
         JMenuItem open = new JMenuItem(new AbstractAction("Open") {
@@ -97,7 +101,43 @@ public class Window extends JFrame {
                 }
             }
         });
+        JMenuItem saveRaw = new JMenuItem(new AbstractAction("Save as .pmm") {
+               public void actionPerformed(ActionEvent ae) {
+                   try {
+                       imageExport.exportRaw(null, p);
+                   } catch(Exception e) {
+                       System.out.println("Balls4kULTRAHD.jpg");
+                   }
+               }
+        });
+        JMenuItem importRaw = new JMenuItem(new AbstractAction("Import .pmm") {
+                public void actionPerformed(ActionEvent ae) {
 
+                    JFileChooser chooser = new JFileChooser();
+
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Paint--", "pmm");
+                    chooser.setFileFilter(filter);
+                    //chooser.getSelectedFile()
+
+                    int returnVal = chooser.showOpenDialog(null);
+                    String path = null;
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
+                    }
+
+                    try {
+                        path = chooser.getSelectedFile().getAbsolutePath();
+                    } catch (Exception e) {
+                        System.out.println("what the crap did u do");
+                    }
+
+                    try {
+                        imageExport.loadRaw(path, p);
+                    } catch(Exception e) {
+                        System.out.println("Okay what the actual balls did u do");
+                    }
+                }
+        });
         JMenu tool = new JMenu("Tool");
         JMenuItem fill = new JRadioButtonMenuItem(new AbstractAction("Fill") {
             public void actionPerformed(ActionEvent ae) {
@@ -137,6 +177,8 @@ public class Window extends JFrame {
 
         menu.add(open);
         menu.add(save);
+        menu.add(importRaw);
+        menu.add(saveRaw);
         tool.add(fill);
         tool.add(brushM);
         tool.add(separator);
