@@ -1,5 +1,6 @@
 package src.WindowComponent;
 
+import src.UIComponent.ChatGPT;
 import src.UIComponent.ColorPicker;
 import src.UIComponent.LayerSelector;
 import src.UIComponent.LayerUI;
@@ -41,7 +42,7 @@ public class UI extends Canvas implements MouseListener, Runnable, MouseMotionLi
         this.y = y;
         this.p = p;
         cp = new ColorPicker(x, y, cWidth - 1, cWidth - 1);
-        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1,  500/* cHeight - 200 - cWidth + 1 */);
+        ls = new LayerSelector(x, y + cWidth - 1, cWidth - 1, 500/* cHeight - 200 - cWidth + 1 */);
 
         ls.addLayer(p.getCurr());
         cp2 = null;

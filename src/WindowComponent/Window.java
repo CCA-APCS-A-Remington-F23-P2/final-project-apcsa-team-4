@@ -80,6 +80,7 @@ public class Window extends JFrame {
                 }
             }
         });
+
         JMenuItem open = new JMenuItem(new AbstractAction("Open") {
             public void actionPerformed(ActionEvent ae) {
 
@@ -91,6 +92,10 @@ public class Window extends JFrame {
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     System.out.println("You chose to open this file: " +
                             chooser.getSelectedFile().getName());
+                }
+
+                if (chooser.getSelectedFile() == null) {
+                    return;
                 }
 
 
