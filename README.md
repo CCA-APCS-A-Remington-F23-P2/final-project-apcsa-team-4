@@ -1,13 +1,13 @@
 
-# Welcome to Paint --!
+# Welcome to paint --!
 
-Welcome to Paint --, a cutting-edge paint program that seamlessly integrates AI features, a sophisticated user interface, and a range of tools to enhance your creative experience.
+Welcome to paint --, a cutting-edge paint program that seamlessly integrates AI features, a sophisticated user interface, and a range of tools to enhance your creative experience.
 
 ## Features
 
 ### 1. AI Integration
 
-Paint -- comes equipped with built-in ChatGPT, providing you with an intelligent assistant right at your fingertips. Whether you need creative suggestions, assistance with techniques, or just want to chat while you paint, the AI integration is here to enhance your artistic journey.
+paint -- comes equipped with built-in ChatGPT, providing you with an intelligent assistant right at your fingertips. Whether you need creative suggestions, assistance with techniques, or just want to chat while you paint, the AI integration is here to enhance your artistic journey.
 
 ### 2. Advanced UI
 
@@ -19,13 +19,13 @@ Our paint program boasts an advanced user interface designed to make your creati
 
 ### 3. Fluid and Intuitive
 
-Paint -- prioritizes a fluid and intuitive user experience. Whether you're a professional artist or just starting out, you'll find the program easy to navigate, ensuring your focus remains on your artwork rather than grappling with complicated tools.
+paint -- prioritizes a fluid and intuitive user experience. Whether you're a professional artist or just starting out, you'll find the program easy to navigate, ensuring your focus remains on your artwork rather than grappling with complicated tools.
 
 ## Getting Started
 
 ### Prerequisites
 
--   Ensure you have the latest version of Paint -- installed.
+-   Ensure you have the latest version of paint -- installed.
 -   An active internet connection for optimal AI features.
 
 ### Installation
@@ -47,6 +47,6 @@ We value your feedback! If you encounter any issues or have suggestions for impr
 
 ## License
 
-Paint -- is licensed under the MIT License. Feel free to use, modify, and share the program according to the terms of the license.
+paint -- is licensed under the MIT License. Feel free to use, modify, and share the program according to the terms of the license.
 
 Happy painting! 🎨

@@ -12,7 +12,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import src.WindowComponent.Layer;
-import src.WindowComponent.Paint;
+import src.WindowComponent.paint;
 import java.util.ArrayList;
 import java.util.List;
 import java.nio.ByteBuffer;
@@ -34,7 +34,7 @@ public class imageExport {
             System.out.println("There was a problem exporting.");
         }
     }
-    public static void exportRaw(Paint p) throws IOException {
+    public static void exportRaw(paint p) throws IOException {
         byte[] outBytes;
         int length = 0;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -60,7 +60,7 @@ public class imageExport {
             bos.close();
         }
     }
-    public static void loadRaw(Paint p) throws IOException, ClassNotFoundException {
+    public static void loadRaw(paint p) throws IOException, ClassNotFoundException {
          byte[] fileContent = Files.readAllBytes(Paths.get("test.pmm"));
          System.out.println(fileContent.length);
          ArrayList<Layer> l = new ArrayList<Layer>();

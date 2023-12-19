@@ -4,11 +4,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import src.WindowComponent.Window;
 
-public class KeyLis extends KeyAdapter {
+public class keyLis extends KeyAdapter {
 
     public Window parent;
 
-    public KeyLis(Window parent) {
+    public keyLis(Window parent) {
         this.parent = parent;
     }
 

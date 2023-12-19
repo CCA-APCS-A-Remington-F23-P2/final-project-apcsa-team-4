@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
-import src.UIComponent.KeyLis;
+import src.UIComponent.keyLis;
 import src.UIComponent.imageExport;
 
 public class Window extends JFrame {
@@ -46,12 +46,12 @@ public class Window extends JFrame {
 
     public static final int UI_HEIGHT = HEIGHT;
 
-    private KeyLis kl;
-    private Paint p;
+    private keyLis kl;
+    private paint p;
     private UI u;
 
     public Window() {
-        super("Paint-- (v0.0.1)");
+        super("paint-- (v0.0.1)");
         java.awt.image.BufferedImage in = null;
 
         File img = new File("assets/cursor.png");
@@ -109,7 +109,7 @@ public class Window extends JFrame {
         JMenuItem saveRaw = new JMenuItem(new AbstractAction("Save as .pmm") {
                public void actionPerformed(ActionEvent ae) {
                    try {
-                       imageExport.exportRaw(null, p);
+                       imageExport.exportRaw(null);
                    } catch(Exception e) {
                        System.out.println("Balls4kULTRAHD.jpg");
                    }
@@ -120,7 +120,7 @@ public class Window extends JFrame {
 
                     JFileChooser chooser = new JFileChooser();
 
-                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Paint--", "pmm");
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("paint--", "pmm");
                     chooser.setFileFilter(filter);
                     //chooser.getSelectedFile()
 
@@ -137,7 +137,7 @@ public class Window extends JFrame {
                     }
 
                     try {
-                        imageExport.loadRaw(path, p);
+                        imageExport.loadRaw(p);
                     } catch(Exception e) {
                         System.out.println("Okay what the actual balls did u do");
                     }
@@ -197,7 +197,7 @@ public class Window extends JFrame {
         setJMenuBar(menubar);
         ((JColorChooser)colorPicker).setColor(Color.BLACK);
 
-        p = new Paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
         u.setCP((JColorChooser)colorPicker);
@@ -233,7 +233,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
 
-        kl = new KeyLis(this);
+        kl = new keyLis(this);
         this.addKeyListener(kl);
 
         // getContentPane().setLayout(new FlowLayout());

@@ -41,7 +41,7 @@ public class ToolPicker implements UIComponent {
         paintToolSelected = false;
     }
 
-    public void selectPaintTool() {
+    public void selectpaintTool() {
         fillToolSelected = false;
         paintToolSelected = true;
     }
@@ -50,7 +50,7 @@ public class ToolPicker implements UIComponent {
         return fillToolSelected;
     }
 
-    public boolean isPaintToolSelected() {
+    public boolean ispaintToolSelected() {
         return paintToolSelected;
     }
 
