@@ -31,9 +31,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
-
+import src.UIComponent.KeyLis;
 import src.UIComponent.imageExport;
-import src.UIComponent.keyLis;
 
 public class Window extends JFrame {
 
@@ -47,8 +46,8 @@ public class Window extends JFrame {
 
     public static final int UI_HEIGHT = HEIGHT;
 
-    private keyLis kl;
-    private paint p;
+    private KeyLis kl;
+    private Paint p;
     private UI u;
 
     public Window() {
@@ -152,10 +151,11 @@ public class Window extends JFrame {
         menubar.add(menu);
         menubar.add(tool);
         brushM.setSelected(true);
+        menubar.setBackground(new Color(210, 210, 210));
         setJMenuBar(menubar);
         ((JColorChooser)colorPicker).setColor(Color.BLACK);
 
-        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        p = new Paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
         u.setCP((JColorChooser)colorPicker);
@@ -191,7 +191,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(WIDTH, HEIGHT));
 
-        kl = new keyLis(this);
+        kl = new KeyLis(this);
         this.addKeyListener(kl);
 
         // getContentPane().setLayout(new FlowLayout());

@@ -81,18 +81,15 @@ public class ChatGPT {
                 OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
                 writer.write(body);
                 writer.flush();
-                System.out.println("oih gopd kill god die bitch die");
                 System.out.println(body);
                 System.out.println(con);
                 System.out.println(con.getContent());
                 Scanner scan = new Scanner(con.getInputStream());
                 String output = "";
                 while (scan.hasNextLine()) {
-                    System.out.println("reeeeeeeeeeeeeeeeeeeeeee");
                     output += scan.nextLine();
                     System.out.println(output);
                 }
-                System.out.println("how hard am i getting throlled rn lmao");
                 output = output.substring(output.indexOf("url") + 7);
                 output = output.substring(0, output.indexOf("\""));
                 URL imgUrl = new URL(output);

@@ -39,6 +39,9 @@ public class Layer {
         this.windowY = windowY;
         visible = true;
     }
+    public void setBuf(BufferedImage i) {
+        buf = i;
+    }
 
     public BufferedImage getImage() {
         if (!visible) {
@@ -126,5 +129,9 @@ public class Layer {
 
         // Return the buffered image
         return bimage;
+    }
+
+    public int getAlpha() {
+        return alpha;
     }
 }
