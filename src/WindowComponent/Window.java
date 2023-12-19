@@ -109,7 +109,7 @@ public class Window extends JFrame {
         JMenuItem saveRaw = new JMenuItem(new AbstractAction("Save as .pmm") {
                public void actionPerformed(ActionEvent ae) {
                    try {
-                       imageExport.exportRaw(null, p);
+                       imageExport.exportRaw(p);
                    } catch(Exception e) {
                        System.out.println("Balls4kULTRAHD.jpg");
                    }
@@ -137,7 +137,7 @@ public class Window extends JFrame {
                     }
 
                     try {
-                        imageExport.loadRaw(path, p);
+                        imageExport.loadRaw(p);
                     } catch(Exception e) {
                         System.out.println("Okay what the actual balls did u do");
                     }

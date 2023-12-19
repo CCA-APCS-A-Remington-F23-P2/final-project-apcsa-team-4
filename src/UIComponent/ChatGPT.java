@@ -70,6 +70,7 @@ public class ChatGPT {
             String url = "https://api.openai.com/v1/images/generations";
             try {
                 HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+                System.out.println(con);
                 System.out.println("brunh");
                 con.setRequestMethod("POST");
                 con.setRequestProperty("Content-Type", "application/json");
@@ -77,7 +78,6 @@ public class ChatGPT {
                 String body = "{\"model\": \"dall-e-2\", \"prompt\": \"" + prompt + "\", \"n\": 1, \"size\": \"" + sizeX
                         + "x" + sizeY + "\"}";
                 con.setDoOutput(true);
-                System.out.println("why god why have u forsaken me");
                 OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
                 writer.write(body);
                 writer.flush();
@@ -94,7 +94,7 @@ public class ChatGPT {
                 output = output.substring(0, output.indexOf("\""));
                 URL imgUrl = new URL(output);
                 BufferedImage buff = ImageIO.read(imgUrl);
-                System.out.println("LMAOOOOOOOO");
+                System.out.println(buff);
                 return buff;
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -104,7 +104,17 @@ public class ChatGPT {
 
     public static void main(String[] args) {
         try {
-            System.out.println(fetchDALLEResponse("a cute cat", 1024, 1024));
+
+            fetchDALLEResponse("a cute cat", 1024, 1024).thenAccept(img -> {
+                try {
+                    System.out.println("waspoppin");
+                    File outputfile = new File("dalle_response.png");
+                    ImageIO.write(img, "png", outputfile);
+                    System.out.println("DALL-E response saved to dalle_response.png");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
             // BufferedImage dalleResponse = fetchDALLEResponse("a cute cat");
             // File outputfile = new File("dalle_response.png");
