@@ -11,7 +11,6 @@ import java.io.File;
 import java.net.URL;
 import java.awt.Image;
 import javax.imageio.ImageIO;
-import java.awt.Texturepaint;
 import java.awt.BasicStroke;
 import java.awt.Rectangle;
 import java.awt.image.RescaleOp;

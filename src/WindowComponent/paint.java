@@ -22,7 +22,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
 
-public class paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
+public class Paint extends Canvas implements MouseListener, Runnable, MouseMotionListener {
 
     private Color col;
     
@@ -47,10 +47,9 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     private boolean erase = false;
     private ArrayList<int[]> mPos;
     private ArrayList<ArrayList<Layer>> undo;
-    private BufferedImage bufferedImage;
     private static final double THRESH = 0.2;
 
-    public paint(int cWidth, int cHeight, int x, int y) {
+    public Paint(int cWidth, int cHeight, int x, int y) {
 
         setVisible(true);
         setFocusable(true);
@@ -92,7 +91,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
     
     public void paint(Graphics window) {
-        bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
         g.setStroke(new BasicStroke(3));
         g.clearRect(0, 0, width, height);
@@ -219,15 +218,12 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
 
     public void keyPress(KeyEvent e) {
-
-    
-
-    if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-        shiftDraw = true;
-    }
-    if (e.getKeyCode() == KeyEvent.VK_F) {
-        fill = true;
-    }
+       if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+           shiftDraw = true;
+       }
+       if (e.getKeyCode() == KeyEvent.VK_F) {
+           fill = true;
+       }
        if (e.getKeyCode() == KeyEvent.VK_E) {
            erase = true;
        }
@@ -239,21 +235,6 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
        }
     }
     public void keyRelease(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_C) {
-        for (Layer l : layers) {
-                int symWidth = width;
-                int symHeight = height;
-            
-                l.setBuf(Transform.crop(l.getImage(), 0, width-30, 0, height-30));
-                symWidth-=30;
-                symHeight-=30;
-        
-            }
-            width-=30;
-            height-=30;
-        }  
-
-    
         if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             shiftDraw = false;
         }

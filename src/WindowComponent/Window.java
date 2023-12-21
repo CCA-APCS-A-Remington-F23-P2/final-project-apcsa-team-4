@@ -47,7 +47,7 @@ public class Window extends JFrame {
     public static final int UI_HEIGHT = HEIGHT;
 
     private keyLis kl;
-    private paint p;
+    private Paint p;
     private UI u;
 
     public Window() {
@@ -109,7 +109,7 @@ public class Window extends JFrame {
         JMenuItem saveRaw = new JMenuItem(new AbstractAction("Save as .pmm") {
                public void actionPerformed(ActionEvent ae) {
                    try {
-                       imageExport.exportRaw(null);
+                       imageExport.exportRaw(p);
                    } catch(Exception e) {
                        System.out.println("Balls4kULTRAHD.jpg");
                    }
@@ -197,7 +197,7 @@ public class Window extends JFrame {
         setJMenuBar(menubar);
         ((JColorChooser)colorPicker).setColor(Color.BLACK);
 
-        p = new paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
+        p = new Paint(PROJECT_WIDTH, PROJECT_HEIGHT, (WIDTH-UI_WIDTH)/2 - PROJECT_WIDTH/2, HEIGHT/2-PROJECT_HEIGHT/2-25);
         u = new UI(UI_WIDTH, UI_HEIGHT, 0, 0, p);
         p.setUI(u);
         u.setCP((JColorChooser)colorPicker);
