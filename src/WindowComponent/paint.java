@@ -220,20 +220,14 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
 
     public void keyPress(KeyEvent e) {
 
-       if(e.getKeyCode() == KeyEvent.VK_C){
-           for(Layer l : layers){
-               l.setBuf(Transform.crop(bufferedImage,0,width-50,0,height-50));
-           }
-       }
+    
 
-       
-
-       if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-           shiftDraw = true;
-       }
-       if (e.getKeyCode() == KeyEvent.VK_F) {
-           fill = true;
-       }
+    if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+        shiftDraw = true;
+    }
+    if (e.getKeyCode() == KeyEvent.VK_F) {
+        fill = true;
+    }
        if (e.getKeyCode() == KeyEvent.VK_E) {
            erase = true;
        }
@@ -245,6 +239,23 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
        }
     }
     public void keyRelease(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_C) {
+        for (Layer l : layers) {
+                int symWidth = width;
+                int symHeight = height;
+            
+                l.setBuf(Transform.crop(l.getImage(), 0, width-30, 0, height-30));
+                l.setWidth(symWidth-30);
+                l.setHeight(symHeight-30);
+                symWidth-=30;
+                symHeight-=30;
+        
+            }
+            width-=30;
+            height-=30;
+        }  
+
+    
         if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             shiftDraw = false;
         }
