@@ -1,3 +1,5 @@
+package src.WindowComponent;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.Image;

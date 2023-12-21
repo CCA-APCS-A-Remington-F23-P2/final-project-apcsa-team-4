@@ -47,6 +47,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     private boolean erase = false;
     private ArrayList<int[]> mPos;
     private ArrayList<ArrayList<Layer>> undo;
+    private BufferedImage bufferedImage;
     private static final double THRESH = 0.2;
 
     public paint(int cWidth, int cHeight, int x, int y) {
@@ -91,7 +92,7 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
     
     public void paint(Graphics window) {
-        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bufferedImage.createGraphics();
         g.setStroke(new BasicStroke(3));
         g.clearRect(0, 0, width, height);
@@ -218,6 +219,15 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
     }
 
     public void keyPress(KeyEvent e) {
+
+       if(e.getKeyCode() == KeyEvent.VK_C){
+           for(Layer l : layers){
+               l.setBuf(Transform.crop(bufferedImage,0,width-50,0,height-50));
+           }
+       }
+
+       
+
        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
            shiftDraw = true;
        }
