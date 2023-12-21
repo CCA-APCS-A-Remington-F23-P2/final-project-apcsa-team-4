@@ -245,8 +245,6 @@ public class paint extends Canvas implements MouseListener, Runnable, MouseMotio
                 int symHeight = height;
             
                 l.setBuf(Transform.crop(l.getImage(), 0, width-30, 0, height-30));
-                l.setWidth(symWidth-30);
-                l.setHeight(symHeight-30);
                 symWidth-=30;
                 symHeight-=30;
         
